@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+footer {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 10px 20px; /* Smaller padding */
+  text-align: center; /* Centered text */
+  font-size: 14px; /* Smaller font size */
+  color: #666; /* Text color */
+  border-top: 1px solid #ccc; /* Subtle top border */
+  margin-top: 20px; /* Space above the footer */
+}

@@ -38,18 +38,14 @@ const HomePage = () => {
             </div>
           */}
         </section>
+      </main>
 
-        <section className="contact">
-          <h2>Liên hệ</h2>
-          <p>208 Lý Thường Kiệt, Q10, TP.HCM</p>
-          {/* Add contact information here */}
-          {/* Example: 
-            <p>Điện thoại: 0123 456 789</p>
-            <p>Email: info@bkprinter
-          */}
-        </section>
-        </main>
-      </div>
+      <footer style={styles.footer}>
+        <p>Liên hệ: 208 Lý Thường Kiệt, Q10, TP.HCM</p>
+        <p>Điện thoại: 0123 456 789</p>
+        <p>Email: info@bkprinter</p>
+      </footer>
+    </div>
   )
   }
 
@@ -118,13 +114,11 @@ const styles = {
   },
   footer: {
     backgroundColor: '#eee',
-    padding: 20,
+    padding: '10px 20px',
     textAlign: 'center',
-  },
-  'footer p': {
-    margin: 0,
-    fontSize: 14,
+    fontSize: '14px',
     color: '#666',
+    borderTop: '1px solid #ccc',
   },
 }
 
