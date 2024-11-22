@@ -1,0 +1,35 @@
+#footer {
+    background: rgba(102, 176, 240, 0.3);
+    padding: 23px 0;
+    color: black;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  }
+  
+  #footer .footer-container {
+    display: flex;
+    justify-content: space-between; /* Evenly space the columns */
+    align-items: center;           /* Align items vertically */
+    flex-wrap: wrap;               /* Wrap items if the container is too small */
+  }
+  
+  #footer .copyright,
+  #footer .address,
+  #footer .contact {
+    flex: 1;                /* Equal width columns */
+    text-align: center;     /* Center-align text in all columns */
+  }
+  
+  #footer .address {
+    text-align: left; /* Specific alignment for this column */
+  }
+  
+  #footer .contact {
+    text-align: right; /* Specific alignment for this column */
+  }
+  
+  #footer .socials a:hover {
+    background: #f53333;
+  }
