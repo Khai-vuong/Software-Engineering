@@ -20,7 +20,7 @@ function AppHero() {
             <div class="d-grid gap-2">
               <Button as="a" href="google.com" variant="primary" size="lg">
               <Image src={anonymous} className="mb-2"/>
-              <div>
+              <div style={{ color: 'black' }}>
                 Người Dùng Khách
               </div>
             </Button>
@@ -30,7 +30,7 @@ function AppHero() {
             <div class="d-grid gap-2">
               <Button as="a" href="google.com" variant="primary" size="lg">
               <Image src={img4} className="mb-2" />
-              <div>
+              <div style={{ color: 'black' }}>
                 Cán bộ và Sinh viên
               </div>
             </Button>

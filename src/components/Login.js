@@ -8,7 +8,7 @@ function Login() {
 
   return (
     <section id="hero" className="block hero-block" style={{ margin: '80px 0px 0' }}>
-    <Container fluid="sm">
+    <Container fluid="sm" style={{minHeight: '300px'}}>
     <Row>
       <Col>
         <img src={img3} alt=""></img>

@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import AppHeader from './components/Header';
-import AppHero from './components/Hero';
+import AppHeader from './components/GuestHeader';
+import AppHero from './components/Choice';
 import AppFooter from './components/Footer';
 
 function App() {

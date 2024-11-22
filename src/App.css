@@ -16,8 +16,8 @@ html {
 
 body {
   color: #333;
-  background: #fff;
-  font: 16px/1.6 "Muli", sans-serif;
+  background: #F0FFFF;
+  font: 16px/1.6 "Podkova", sans-serif;
   min-width: 320px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -369,7 +369,7 @@ textarea {
 
 .block {
   padding: 70px 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #F0FFFF;
 }
 
 
