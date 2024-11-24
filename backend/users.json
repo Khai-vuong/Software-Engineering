@@ -1,0 +1,22 @@
+[
+  {
+    "username": "newuser",
+    "password": "password123",
+    "info": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone_num": "123-456-7890"
+    },
+    "print_history": []
+  },
+  {
+    "username": "tdat",
+    "password": "123",
+    "info": {
+      "name": "Thanh Dat",
+      "email": "123@gmail.com",
+      "phone_num": "1234"
+    },
+    "print_history": []
+  }
+]
