@@ -2,15 +2,14 @@ import '../components/css/Hero.css';
 import '../components/css/Print_Config.css';
 import Form from 'react-bootstrap/Form';
 import FilePreview from '../components/File_Preview';
-import Button from 'react-bootstrap/Button';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import pdfFile from '../assets/images/N5-2018.pdf';
 import ai from '../assets/images/ai.docx';
 import img3 from '../assets/images/img2.png'
 import ex from '../assets/images/patients.csv'
 
 function Print_Config() {
-    // Mấy ông Backend làm Logic gì ở đây nha 
+    // Mấy ông Backend làm Logic gì ở đây nha
     const docs = [
         { uri: pdfFile, // Remote file
           fileType: "pdf",
@@ -23,14 +22,17 @@ function Print_Config() {
       ];
     
 
-    
-    const img = [
-        { uri: img3,
-            fileType: 'png',
-          fileName: "img2.png"
-        }
-    ];
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';  // Disable scroll
+
+        // Cleanup: restore scroll behavior when the component unmounts or changes
+        return () => {
+            document.body.style.overflow = 'auto';  // Enable scroll again
+        };
+    }, []);
+
     const [isCustomSelected, setIsCustomSelected] = useState(false);
+    const [filePreview, setFilePreview] = useState(docs);
     const handleSelectChange = (e) => { 
         if (e.target.value === "0") { 
             setIsCustomSelected(true); 
@@ -48,7 +50,7 @@ function Print_Config() {
                     <div className="row" style={{height: '100%'}}>
                         <div className="col-8 border-col" style={{height:'100%'}}>
                             <div className="file-preview-container">
-                            <FilePreview style={{height:'100%', width:'100%'}} docs={docs} />
+                            <FilePreview style={{height:'100%', width:'100%'}} docs={filePreview} />
 
                             </div>
                         </div>
