@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import '../components/css/Hero.css';
 
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import img2 from '../assets/images/img2.png';
 
 function AppLandingHero() {
@@ -18,7 +20,11 @@ function AppLandingHero() {
             <div className="title-holder">
               <br/><br/><br/><br/>
               <h2>Chào mừng bạn đến với BKPrinter</h2>
-              <a className="btn btn-primary" href={'google.com'}> Đăng nhập <i className="fas fa-chevron-right"></i></a>
+              <div>
+                <Link to="/choice">
+                  <Button variant="primary">Đăng Nhập</Button>
+                </Link>
+              </div>
             </div>
           </Col>
         </Row>

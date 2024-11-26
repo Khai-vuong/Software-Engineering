@@ -25,7 +25,6 @@
     font-size: 22px;
     line-height: 1.6;
   }
-  
   #header .navbar-collapse {
     flex-grow: 0;
   }
@@ -68,4 +67,20 @@
     transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
     opacity: 0;
+  }
+  #header .navbar-collapse .navbar-nav {
+    margin: 0;
+  }
+  #header {
+    padding: 10px 0;
+  }
+
+  #header .navbar-collapse .navbar-nav {
+    float: none;
+  }
+
+  #header .navbar-collapse .nav-item {
+    float: none;
+    display: block;
+    padding: 7px 0;
   }
