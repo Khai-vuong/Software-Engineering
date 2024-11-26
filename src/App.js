@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import AppHeader from './components/GuestHeader';
-import AppHero from './components/Choice';
+import AppHero from './components/Print_Config';
 import AppFooter from './components/Footer';
 
 function App() {

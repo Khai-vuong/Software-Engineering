@@ -1,0 +1,80 @@
+.printer-parent {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    
+    display: flex;
+    justify-content: center;
+    
+}
+.printer {
+    background: rgba(246, 236, 236, 0.50);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 1px rgba(0, 0, 0, 0.20) solid;
+    width: 55%; /* Set desired width */
+    height: 70%;
+    overflow: hidden;
+}
+.content-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.header {
+    font-size: 30px;
+    color: #3B5AF3;
+    font-weight: 800;
+    font-family: 'Playfair Display';
+    word-wrap:break-word;
+    margin-top: 10px;
+}
+.normal-font{
+    color:black;
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.Error {
+    color:red;
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.file_name {
+    color:black;
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.Not_Error {
+    color: green;
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.upload-file{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.upload-file-container{
+    transform-origin: 0 0;
+    width: 95%;
+    height: 60%;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 2px solid black;
+}
+
+.upload-file-container img {
+    width: 200px;
+    height: auto;
+}
