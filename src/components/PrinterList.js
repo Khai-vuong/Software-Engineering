@@ -1,9 +1,13 @@
-import { Container, Button, ListGroup } from "react-bootstrap";
+import { Container, Button, ListGroup,Modal,Form } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
+import '../components/css/Hero.css';
 
 function PrinterList() {
     // State to store printers with their enabled/disabled status
     const [printers, setPrinters] = useState([]);
+    const [showAddPrinterModal, setShowAddPrinterModal] = useState(false);
+    const [newPrinterName, setNewPrinterName] = useState("");
+
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     // Simulate fetching printers (could be from an API or database)
@@ -69,12 +73,38 @@ function PrinterList() {
         }
         
     };
+    const handleAddPrinter = () => {
+        if(!newPrinterName.trim())  return;
 
+        setPrinters(prevPrinters => [
+            ...prevPrinters,
+            {name: newPrinterName.trim(),enabled:true},
+        ]);
+        setNewPrinterName("");
+        setShowAddPrinterModal(false);
+        
+        // UNCOMMENT FOR BACKEND API
+        // try {
+        //     const response = await fetch("...", {
+        //         method: "POST",
+        //         headers: { "Content-type": "application/json" },
+        //         body: JSON.stringify({ name: newPrinterName.trim() }),
+        //     });
+        //     if (!response.ok) throw new Error("Failed to add printer");
+        // } catch (error) {
+        //     console.error("Error adding printer: ", error);
+        // }
+    };
     if (loading) return <Container className="mt-4"><h4>Loading printers...</h4></Container>;
     if (error) return <Container className="mt-4"><h4>{error}</h4></Container>
     return (
         <Container className="mt-4">
-            <h4>Available Printers</h4>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+        <h4>Máy In Hiện Có</h4>
+        <Button variant="primary" onClick={() => setShowAddPrinterModal(true)}>
+            Thêm máy in
+        </Button>
+    </div>
             <ListGroup>
                 {printers.map((printer, idx) => (
                     <ListGroup.Item
@@ -89,11 +119,40 @@ function PrinterList() {
                                 togglePrinterStatus(printer.name,!printer.enabled);
                             }}
                         >
-                            {printer.enabled ? "Disable" : "Enable"}
+                            {printer.enabled ? "Vô hiệu hóa" : "Kích hoạt"}
                         </Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
+            <Modal 
+                show={showAddPrinterModal} 
+                onHide={() => setShowAddPrinterModal(false)}
+                dialogClassName="modal-dialog-centered"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Thêm Máy In</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="newPrinterName">
+                            <Form.Label>Tên máy in</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Nhập tên máy in" 
+                                value={newPrinterName} 
+                                onChange={(e) => setNewPrinterName(e.target.value)}/>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowAddPrinterModal(false)}>
+                        Hủy
+                    </Button>
+                    <Button variant="primary" onClick={handleAddPrinter}>
+                        Thêm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }

@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, ListGroup, Nav } from "react-bootstrap";
 import PrinterList from "./PrinterList";
 import { Router,Route, Routes,Link} from "react-router-dom";
 import PrintSetting from "./PrintSetting";
+import '../components/css/Hero.css';
 function Layout() {
     return (
         <section id="hero" className="block hero-block" style={{margin:'10px 0px 0'}}>
@@ -11,16 +12,16 @@ function Layout() {
                 <Row>
                     {/* Sidebar */}
                     <Col xs={3} className="bg-light p-3">
-                        <h4>SPSO Configuration</h4>
+                        <h4>CẤU HÌNH HỆ THỐNG MÁY IN</h4>
                         <Nav defaultActiveKey="/printers" className="flex-column">
                             <Nav.Item>
                                 <Link to="/printers" className="nav-link">
-                                    Printers
+                                    Máy In
                                 </Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Link to="/printSetting" className="nav-link">
-                                    Print Settings
+                                    Cấu Hình In
                                 </Link>
                             </Nav.Item>
                         </Nav>
