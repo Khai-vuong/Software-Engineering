@@ -111,7 +111,7 @@ function PrinterList() {
                         key={idx}
                         className="d-flex justify-content-between align-items-center"
                     >
-                        <span>{printer.name} ({printer.enabled ? "Enabled" : "Disabled"})</span>
+                        <span>{printer.name} ({printer.enabled ? "Kích hoạt" : "Vô hiệu hóa"})</span>
                         <Button
                             variant={printer.enabled ? "warning" : "success"}
                             onClick={(e) => {
