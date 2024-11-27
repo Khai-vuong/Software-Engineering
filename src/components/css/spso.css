@@ -1,0 +1,41 @@
+.hero-block {
+    margin: 80px 0 0;
+    text-align: center; /* Center align content */
+    padding: 40px 20px; /* Add internal padding */
+    background: #f8f9fa; /* Light gray background */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.hero-block p {
+    margin: 0 0 30px;
+    font-size: 16px;
+    color: #6c757d; /* Subtle gray for text */
+}
+
+@media (max-width: 768px) {
+    .hero-block {
+        margin: 40px 0 0; /* Reduce margin for smaller screens */
+    }
+
+    .hero-block p {
+        font-size: 14px; /* Adjust text size */
+    }
+}
+
+.btn.btn-primary:hover {
+    background: rgba(82, 156, 220, 1); /* Slightly darker blue */
+    color: #fff; /* Ensure white text for contrast */
+}
+.btn.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 176, 240, 0.5); /* Focus ring for accessibility */
+}
+.nav-link {
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    color: #495057;
+}
+.nav-link:hover, .nav-link.active {
+    background-color: #007bff;
+    color: white !important;
+}

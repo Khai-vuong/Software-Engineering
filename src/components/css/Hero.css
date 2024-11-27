@@ -1,0 +1,86 @@
+.btn.btn-primary {
+    background: rgba(102, 176, 240, 1);
+    border-color: rgba(102, 176, 240, 1);
+    padding: 13px 35px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.3s linear, color 0.3s linear;
+    -webkit-transition: background 0.3s linear, color 0.3s linear;
+  }
+
+.hero-block p {
+    margin: 0 0 25px;
+  }
+.hero-block {
+    margin: 80px 0 0;
+  }
+  
+.hero-block p {
+    margin: 0 0 30px;
+  }
+/* Add background color for the table */
+.table {
+  background-color: #f5f5f5; /* Light gray */
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Styling for the table header */
+.table thead th {
+  background-color: rgba(102, 176, 240, 1); /* Green */
+  color: white;
+  padding: 10px;
+  text-align: center; /* Horizontal alignment */
+  vertical-align: middle; /* Vertical alignment */
+}
+
+/* Styling for the table rows */
+.table tbody tr {
+  background-color: #ffffff; /* White */
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #ddd; /* Gray on hover */
+}
+
+/* Optional: Add padding to table cells */
+.table td, .table th {
+  text-align: center; /* Horizontal alignment */
+  vertical-align: middle; /* Vertical alignment */
+  padding: 10px;
+}
+.button-holder {
+  text-align: right;
+  margin: 0 0 40px;
+}
+
+.button-holder h2 {
+  margin: 0 0 5px;
+  text-transform: uppercase;
+}
+
+.button-holder .subtitle {
+  color: #999999;
+}
+
+.button-holder .subtitle:before {
+  content: '-';
+  margin: 0 5px 0 0;
+}
+
+.button-holder .subtitle:after {
+  content: '-';
+  margin: 0 0 0 5px;
+}
+
+.button-holder {
+  margin: 0 0 20px;
+}
