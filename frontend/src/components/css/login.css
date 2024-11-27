@@ -1,0 +1,34 @@
+.login-btn {
+    border: none;
+    background-color: #66B0F0;
+    width: 100%;
+
+}
+
+.rounded-container {
+    background-color: rgba(102, 176, 240, 0.3);
+    border-radius: 20px;
+    padding: 60px;
+    width: 480px;
+    height: 360px;
+    /* margin: 20px auto; */
+}
+
+.form-input {
+    display: block; /* Ensure inputs are stacked */
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Inner spacing */
+    margin-bottom: 30px; /* Space between inputs */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 10px; /* Rounded inputs */
+  }
+
+  .form-button {
+    background-color: #66B0F0; /* Primary blue */
+    color: black;
+    border: none;
+    padding: 30px;
+    width: 80%; /* Full width */
+    border-radius: 10px;
+    cursor: pointer;
+  }
