@@ -39,6 +39,14 @@ function AppHero() {
                 </div>
               </Button>
               </Link>
+              <Link to="/loginasstaff">
+                <Button as="a" href="google.com" variant="primary" size="lg">
+                <Image src={img4} className="mb-2" />
+                <div style={{ color: 'black' }}>
+                  nút thử cho SPSO
+                </div>
+              </Button>
+              </Link>
             </div>
           </Col>
         </Row>

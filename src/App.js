@@ -9,6 +9,7 @@ import GuestAppHeader from './components/GuestHeader';
 import AppHistory from './pages/History';
 import AppPurchase from './pages/Purchase';
 import AppHelp from './pages/Help';
+import AppUser from './pages/User';
 import PrintConfig from './components/Print_Config';
 import Print from './pages/Print';
 import Login from './components/Login';
@@ -16,6 +17,7 @@ import Choice from './components/Choice';
 import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
 import AppPrintStatus from './components/Print_Status';
+import Layout from './components/SPSOConfig';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route path="/" element={<AppLandingHero/>} /> {/* Default route */}
         <Route path="/choice" element={<Choice/>} /> {/* Choice */}
         <Route path="/login" element={<Login/>} /> {/* Log in */}
+        <Route path="/loginasstaff" element={<Layout/>} /> {/* Log in */}
         <Route path="/guest" element={<AppGuestHero/>} /> {/* Guest */}
         <Route path="/logedin" element={<AppHero/>} /> {/* Loged in */}
         <Route path="/print" element={<Print />} /> {/* Route for print config */}
@@ -37,6 +40,7 @@ function App() {
         <Route path="/history" element={<AppHistory />} /> {/* Printing History */}
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
+        <Route path="/user" element={<AppUser />} /> {/* user */}
       </Routes>
       </main>
       <footer id="footer">
