@@ -132,6 +132,7 @@ function Print() {
       };
     return (
         <section id="hero" className="block hero-block" style={{ margin: '70px 50px 0'}}>
+            <div style={{ display: 'flex', justifyContent: 'center'}}>
             <div class="printer-parent container" style={{ display: 'flex', gap: '50px'}}>
             <div class="col-mb-2 printer">
                     <div class="container content-header">
@@ -195,7 +196,7 @@ function Print() {
                 </div>
             </div>
             </div>
-
+            </div>
             <Modal show={showModal} onHide={closeModal} style={{marginTop:"15%"}}> 
                 <Modal.Header closeButton>
                     <Modal.Title>Unsupported File Type</Modal.Title>

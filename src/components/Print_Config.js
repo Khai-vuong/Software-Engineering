@@ -4,10 +4,41 @@ import Form from 'react-bootstrap/Form';
 import FilePreview from '../components/File_Preview';
 import React, { useState,useEffect } from 'react';
 import pdfFile from '../assets/images/N5-2018.pdf';
-import ai from '../assets/images/ai.docx';
-import img3 from '../assets/images/img2.png'
-import ex from '../assets/images/patients.csv'
+import Modal from 'react-bootstrap/Modal';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
+function Save(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Xác nhận in
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{textAlign: 'center'}}>
+          <h3>File: A.docx, B.pdf, D.docx, E.pdf</h3>
+          <h3>Số trang: 30</h3>
+          <h3>Số bản: 4</h3>
+          <h3>Số trang hiện có: 25</h3>
+        </Modal.Body>
+        <Modal.Footer>
+            <Link to='/confirm'>
+                <Button variant="primary" type="submit">
+                        Xác nhận
+                </Button>
+            </Link>
+          <Button onClick={props.onHide}>Hủy</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+}
 function Print_Config() {
     // Mấy ông Backend làm Logic gì ở đây nha
     const docs = [
@@ -40,8 +71,7 @@ function Print_Config() {
             setIsCustomSelected(false); 
         } 
     };
-    
-
+    const [modalShow, setModalShow] = React.useState(false);
 
     return (
         <section id="hero" className="block hero-block" style={{ margin: '10px 0px 0' }}>
@@ -105,7 +135,17 @@ function Print_Config() {
                                     </Form.Select>
                                 </Form>
                                 </div>
-                                <div style={{display:'flex',justifyContent:'center', marginBottom:"30px"}}><button type="button" class="btn btn-primary">Lưu</button></div>
+                                <div style={{display:'flex',justifyContent:'center', marginBottom:"30px"}}>
+                                    <div className="button-holder">
+                                        <Button variant="primary" onClick={() => setModalShow(true)}>
+                                            Lưu
+                                        </Button>
+                                        <Save
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

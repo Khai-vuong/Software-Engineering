@@ -15,6 +15,7 @@ import Login from './components/Login';
 import Choice from './components/Choice';
 import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
+import AppPrintStatus from './components/Print_Status';
 
 function App() {
   return (
@@ -27,10 +28,11 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLandingHero/>} /> {/* Default route */}
         <Route path="/choice" element={<Choice/>} /> {/* Choice */}
-        <Route path="/login" element={<Login/>} /> {/* Choice */}
+        <Route path="/login" element={<Login/>} /> {/* Log in */}
         <Route path="/guest" element={<AppGuestHero/>} /> {/* Guest */}
         <Route path="/logedin" element={<AppHero/>} /> {/* Loged in */}
         <Route path="/print" element={<Print />} /> {/* Route for print config */}
+        <Route path="/confirm" element={<AppPrintStatus />} /> {/* Route for print status */}
         <Route path="/setup" element={<PrintConfig />} /> {/* Route for print config */}
         <Route path="/history" element={<AppHistory />} /> {/* Printing History */}
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
