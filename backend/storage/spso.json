@@ -1,0 +1,16 @@
+[
+    {
+        "Phone": "1234567890",
+        "Name": "Admin1",
+        "Username": "admin",
+        "Email": "admin1@example.com",
+        "Password": "admin"
+    },
+    {
+        "Phone": "1234567890",
+        "Name": "Admin2",
+        "Username": "admin",
+        "Email": "admin1@example.com",
+        "Password": "admin"
+    }
+]
