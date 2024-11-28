@@ -96,6 +96,7 @@ function PrintSetting() {
     }
 
     return (
+        <section id="hero" className="block hero-block">
         <Container className="mt-4">
             <h4>CẤU HÌNH IN</h4>
             {!isEditing ? (
@@ -174,6 +175,7 @@ function PrintSetting() {
                 </Form>
             )}
         </Container>
+        </section>
     );
 }
 

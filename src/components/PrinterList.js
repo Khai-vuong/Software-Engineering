@@ -98,6 +98,7 @@ function PrinterList() {
     if (loading) return <Container className="mt-4"><h4>Loading printers...</h4></Container>;
     if (error) return <Container className="mt-4"><h4>{error}</h4></Container>
     return (
+        <section id="hero" className="block hero-block">
         <Container className="mt-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
         <h4>Máy In Hiện Có</h4>
@@ -154,6 +155,7 @@ function PrinterList() {
                 </Modal.Footer>
             </Modal>
         </Container>
+        </section>
     );
 }
 
