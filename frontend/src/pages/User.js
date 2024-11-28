@@ -3,14 +3,14 @@ import { Card, Spin, Typography } from 'antd';
 import Container from 'react-bootstrap/Container';
 const { Title, Text } = Typography;
 
-const UserInfo = () => {
+const UserInfo = ({username}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/user');
+        const response = await fetch(`http://localhost:4000/api/user/${username}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -24,7 +24,7 @@ const UserInfo = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [username]);
 
   if (loading) {
     return <Spin size="large" />;
@@ -37,19 +37,19 @@ const UserInfo = () => {
         <Title level={2} style={styles.title}>Thông tin người dùng</Title>
         <div style={styles.infoBox}>
             <Text strong>Tên: </Text>
-            <Text>Tên</Text>
+            <Text>{user.info.username}</Text>
             <br />
             <Text strong>Email: </Text>
-            <Text>email</Text>
+            <Text>{user.info.username}</Text>
             <br />
             <Text strong>Phone: </Text>
-            <Text>phone</Text>
+            <Text>{user.info.username}</Text>
             <br />
             <Text strong>Số dư trang: </Text>
-            <Text>balance</Text>
+            <Text>{user.info.username}</Text>
             <br />
             <Text strong>Địa chỉ: </Text>
-            <Text>address</Text>
+            <Text>{user.info.username}</Text>
         </div>
         </Card>
       </Container>
