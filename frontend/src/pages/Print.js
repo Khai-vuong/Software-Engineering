@@ -39,6 +39,7 @@ function Print() {
     const [showModal, setShowModal] = useState(false);
     const [unsupportedFile, setUnsupportedFile] = useState('');
     const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     // File nếu > 100 MB thì không thể upload lên được, hiện thanh upload error
     // Tránh tình trạng upload file lớn quá database chịu không được
@@ -49,6 +50,7 @@ function Print() {
         const file = event.target.files[0];
         if (!file) return;
         const iconClass = getFileIconClass(file.name);
+        setSelectedFile(file);
         if (!iconClass) {
             // Show modal for unsupported file types
             setUnsupportedFile(file.name);
@@ -128,7 +130,7 @@ function Print() {
     // Modal Pop up nếu sai định dạng
     const closeModal = () => setShowModal(false);
     const handleSetupClick = () => {
-        navigate('/setup'); // Navigate to the print config page
+        navigate('/setup', {state: {selectedFile}}); // Navigate to the print config page
       };
     return (
         <section id="hero" className="block hero-block" style={{ margin: '70px 50px 0'}}>

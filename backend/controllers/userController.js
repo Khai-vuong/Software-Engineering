@@ -1,5 +1,6 @@
 const fs = require('fs');
 const userDataFile = './storage/users.json';
+const print_historyDataFile = './storage/print_history.json';
 
 const readUserData = () => {
   try {
@@ -10,6 +11,17 @@ const readUserData = () => {
     return [];
   }
 };
+
+const readPrintHistoryData = () => {
+  try {
+    const data = fs.readFileSync(print_historyDataFile, 'utf8');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading user data:', error);
+    return [];
+  }
+};
+
 
 const getUserInfo = (req, res) => {
   if (req.session.username) {
@@ -33,9 +45,28 @@ const getUserInfo = (req, res) => {
 
 const putUserInfo = (req, res) =>{}
 
-const getUserPrintHistory = (req, res) =>{}
+const getUserPrintHistory = (req, res) =>{
+  if (req.session.username) {
+    const print_hiss = readPrintHistoryData();
+    const print_his = print_hiss.filter(print_his => print_his.username === req.session.username);
 
-module.exports = { getUserInfo };
+    if (print_his.length > 0) {
+      res.json(print_his.map(history => ({
+        PName: history.PName,
+        DName: history.DName,
+        StartTime: history.config.StartTime,
+        EndTime: history.config.EndTime,
+        Status: history.config.Status
+      })));
+    } else {
+        res.status(404).json({ message: 'No printing history' });
+    }
+  } else {
+    res.status(401).json({ message: 'Not logged in' });
+  }
+}
+
+module.exports = { getUserInfo,  getUserPrintHistory };
 
 
 
@@ -239,10 +270,6 @@ module.exports = { getUserInfo };
 //     "print_history": []
 //   }
 // ]
-
-
-
-
 
 
 

@@ -24,7 +24,7 @@ function AppHero() {
         }
 
         const data = await response.json();
-        setUsername(data.username); // Set the username from the response
+        setUsername(data.name); // Set the username from the response
       } catch (err) {
         setError(err.message);
       } finally {

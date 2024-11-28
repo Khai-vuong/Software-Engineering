@@ -24,6 +24,7 @@ export default function AppHeader(){
                         <Nav.Link as={Link} to="/purchase">Thanh Toán</Nav.Link>
                         <Nav.Link as={Link} to="/help">Hỗ trợ</Nav.Link>
                         <Nav.Link as={Link} to="/user">User</Nav.Link>
+                        <Nav.Link as={Link} to="/"> Đăng xuất</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

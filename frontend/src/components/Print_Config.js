@@ -5,11 +5,17 @@ import FilePreview from '../components/File_Preview';
 import React, { useState,useEffect } from 'react';
 import pdfFile from '../assets/images/N5-2018.pdf';
 import Modal from 'react-bootstrap/Modal';
-import Table from 'react-bootstrap/Table';
+// import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Save(props) {
+    const location = useLocation();
+    const { file } = location.state || {}; // Access the file from the state
+
+    // Now you can use the file as needed
+    console.log(file);
     return (
       <Modal
         {...props}
@@ -24,6 +30,7 @@ function Save(props) {
         </Modal.Header>
         <Modal.Body style={{textAlign: 'center'}}>
           <h3>File: A.docx, B.pdf, D.docx, E.pdf</h3>
+          {file && <h3>Uploaded File: {file.name}</h3>}
           <h3>Số trang: 30</h3>
           <h3>Số bản: 4</h3>
           <h3>Số trang hiện có: 25</h3>
