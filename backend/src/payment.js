@@ -1,5 +1,14 @@
 const express = require('express');
+const database = require('../storage/database');
 const router = express.Router();
+
+/*
+  Các routes dùng cho thanh toán Page (mua giấy trên BK pay)
+  POST /payment/create: Tạo một thanh toán mới
+    
+  param: body: { pageNumber : int}
+  return: { message: string }
+*/
 
 // Define routes
 router.get('/', (req, res) => {
@@ -7,8 +16,24 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-  const paymentDetails = req.body;
-  res.send(`Payment created with details: ${JSON.stringify(paymentDetails)}`);
+  const user = req.session.username  // Get the user from the session
+  if (!user) {
+    res.status(301).json({ message: 'Not logged in' });
+    return;
+  }
+
+  const paymentDetails = {
+    Poid: database.PageOrder.length + 1,
+    Price: req.body.pageNumber * 1000,
+    BuyTime: new Date().toISOString(),
+    NumberOfPage: req.body.pageNumber,
+    Status: 'Paid',
+    User: user.username
+  }
+
+  database.PageOrder.push(paymentDetails);
+
+  res.json({ message: 'Payment created successfully' });
 });
 
 router.get('/:id', (req, res) => {

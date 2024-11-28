@@ -63,11 +63,16 @@ const database = {
         "StartTime": "2024-11-01T13:00:00Z",
         "EndTime": "2024-11-01T13:30:00Z",
         "Status": "Completed",
+
         "NumberOfPage": 10,
-        "PrintingPage": 5,
-        "Uid": 1,
-        "Pid": 1,
-        "printConfiguration": "Color"
+        "NumberOfCopy": 5,
+        "Ratio" : "1:1",
+        "PaperSize": "A4",
+        "NumbeofSide": "Single",
+
+        "Uname": 'aaa',   // Ref to Uid
+        "Pname": "Printer A",   //Ref to Pid
+
       }
     ],
     "Response": [
