@@ -5,7 +5,13 @@ const fs = require('fs');
 const app = express();
 const PORT = 4000;
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow requests from this origin
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const userDataFile = './users.json';
@@ -103,7 +109,19 @@ app.post('/api/login', (req, res) => {
 
 app.get('/api/user', (req, res) => {
   if (req.session.username) {
-    res.json({ username: req.session.username });
+    const users = readUserData();
+    const user = users.find(user => user.username === req.session.username);
+
+    if (user) {
+      res.json({
+        username: user.username,
+        name: user.info.name,
+        email: user.info.email,
+        phone_num: user.info.phone_num
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
   } else {
     res.status(401).json({ message: 'Not logged in' });
   }

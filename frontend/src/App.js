@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import { BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
 import AppHeader from './components/Header';
 import AppHero from './components/Hero';
 import AppFooter from './components/Footer';
@@ -21,6 +22,7 @@ import Layout from './components/SPSOConfig';
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
     <div className="App">
       <header id="header">
@@ -48,6 +50,7 @@ function App() {
       </footer>
     </div>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 function HeaderSwitcher() {

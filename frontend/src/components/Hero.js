@@ -8,40 +8,40 @@ import '../components/css/Hero.css';
 import img2 from '../assets/images/img2.png';
 
 function AppHero() {
-  // const [username, setUsername] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchUsername = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:4000/api/user', {
-  //         credentials: 'include', // Include credentials for session
-  //       });
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/user', {
+          credentials: 'include', // Include credentials for session
+        });
 
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch username');
-  //       }
+        if (!response.ok) {
+          throw new Error('Failed to fetch username');
+        }
 
-  //       const data = await response.json();
-  //       setUsername(data.username); // Set the username from the response
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+        const data = await response.json();
+        setUsername(data.username); // Set the username from the response
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchUsername();
-  // }, []);
+    fetchUsername();
+  }, []);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
 
   return (
@@ -55,8 +55,7 @@ function AppHero() {
             <div className="title-holder">
               <br/><br/><br/><br/>
               <h2>Chào mừng bạn đến với BKPrinter</h2>
-              <h1>User 1</h1>
-              {/* {username && <h1>{username}</h1>} Display the username */}
+              {username && <h1>{username}</h1>}
             </div>
           </Col>
         </Row>

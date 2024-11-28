@@ -5,8 +5,10 @@ import "../components/css/login.css"
 import Container from 'react-bootstrap/Container';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Adjust the import path
 
 function Login() {
+  const { login } = useAuth(); // Access the login function from context
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -21,22 +23,21 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password }), // Send username and password
+        credentials: 'include', // Include credentials for session
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
+        throw new Error(errorData.message || 'Login failed'); // Use the error message from the response
       }
 
       const data = await response.json();
-      console.log('Login successful:', data);
-      // login(data.user.username);
-      sessionStorage.setItem('username', data.user.username);
-      navigate('/logedin');
+      login(data.user.username); // Store the username in context
+      navigate('/logedin'); // Redirect to the logged-in page
     } catch (error) {
       console.error('Error during login:', error);
-      setErrorMessage('Incorrect username or password. Please try again.');
+      setErrorMessage('Incorrect username or password. Try again.'); // Set error message
     }
   };
 

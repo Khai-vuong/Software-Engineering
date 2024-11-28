@@ -3,23 +3,20 @@ import { Card, Spin, Typography } from 'antd';
 import Container from 'react-bootstrap/Container';
 const { Title, Text } = Typography;
 
-const UserInfo = ({username}) => {
+const UserInfo = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/user/tdat`);
+        const response = await fetch(`http://localhost:4000/api/user`, {
+          credentials: 'include', // Include credentials for session
+        });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        const { info } = data; 
-        const name = info.name; 
-        const email = info.email; 
-        const phone_num = info.phone_num;
-        setUser({ ...data, info: { name, email, phone_num } });
         setUser(data);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -29,7 +26,7 @@ const UserInfo = ({username}) => {
     };
 
     fetchUser();
-  }, [username]);
+  });
 
   if (loading) {
     return <Spin size="large" />;
@@ -42,13 +39,13 @@ const UserInfo = ({username}) => {
         <Title level={2} style={styles.title}>Thông tin người dùng</Title>
         <div style={styles.infoBox}>
             <Text strong>Tên: </Text>
-            <Text>{user.info.name}</Text>
+            <Text>{user.name}</Text>
             <br />
             <Text strong>Email: </Text>
-            <Text>{user.info.email}</Text>
+            <Text>{user.email}</Text>
             <br />
             <Text strong>Phone: </Text>
-            <Text>{user.info.phone_num}</Text>
+            <Text>{user.phone_num}</Text>
             <br />
             <Text strong>Số dư trang: </Text>
             <Text>{user.name}</Text>
