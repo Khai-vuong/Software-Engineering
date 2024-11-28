@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const cors = require('cors');
 const fs = require('fs');
 const app = express();
@@ -8,6 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 const userDataFile = './users.json';
+
+app.use(session({
+  secret: 'your-secret-key', // Change this to a strong secret
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 const readUserData = () => {
   try {
@@ -25,6 +33,11 @@ const writeUserData = (users) => {
 
 app.post('/api/register', (req, res) => {
   const { username, password, name, email, phone_num } = req.body;
+  // Check for required fields
+  if (!username || !password || !name || !email || !phone_num) {
+    return res.status(400).json({ message: 'All fields are required: username, password, name, email, phone_num' });
+  }
+
   const users = readUserData();
   const existingUser = users.find(user => user.username === username);
   if (existingUser) {
@@ -36,7 +49,9 @@ app.post('/api/register', (req, res) => {
     info: {
       name,
       email,
-      phone_num
+      phone_num,
+      balance,
+      address
     },
     print_history: []
   });
@@ -79,9 +94,18 @@ app.post('/api/login', (req, res) => {
 
   const user = users.find(user => user.username === username && user.password === password);
   if (user) {
+    req.session.username = user.username; // Store username in session
     res.status(200).json({ message: 'Login successful', user: { username: user.username, info: user.info } });
   } else {
     res.status(401).json({ message: 'Invalid username or password' });
+  }
+});
+
+app.get('/api/user', (req, res) => {
+  if (req.session.username) {
+    res.json({ username: req.session.username });
+  } else {
+    res.status(401).json({ message: 'Not logged in' });
   }
 });
 
