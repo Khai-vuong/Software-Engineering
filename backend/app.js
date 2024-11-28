@@ -7,11 +7,14 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 const PORT = 4000;
 
+const paymentRoutes = require('./src/payment'); // Import the payment router
+
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
 };
 
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session({
@@ -23,6 +26,7 @@ app.use(session({
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/payment', paymentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
