@@ -12,7 +12,7 @@ const database = {
     "User": [
       {
         "Uid": 1,
-        "Name": "aaa",
+        "Username": "aaa",
         "Email": "user1@example.com",
         "Password": "aaa",
         "LastUse": "2024-11-01T10:00:00Z",
@@ -54,7 +54,7 @@ const database = {
         "BuyTime": "2024-11-01T12:00:00Z",
         "NumberOfPage": 10,
         "Status": "Paid",
-        "Uid": 1
+        "User": 'aaa'   // Ref to Uid
       }
     ],
     "PrintOrder": [

@@ -5,6 +5,9 @@ const fs = require('fs');
 const app = express();
 const PORT = 4000;
 
+const paymentRoutes = require('./src/payment'); // Import the payment router
+
+
 // CORS configuration
 const corsOptions = {
   origin: 'http://localhost:3000', // Allow requests from this origin
@@ -22,6 +25,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false } // Set to true if using HTTPS
 }));
+
+app.use(bodyParser.json()); // For parsing JSON request bodies
+
+app.use('/payment', paymentRoutes);
+
 
 const readUserData = () => {
   try {
