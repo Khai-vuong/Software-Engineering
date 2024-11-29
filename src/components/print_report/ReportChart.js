@@ -1,85 +1,149 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell } from 'recharts';
 
-// Đảm bảo đã đăng ký các phần tử cần thiết của Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
-
-const option = (title) => ({
-    plugins: {
-        title: {
-            display: true,
-            text: title,
-        },
-    },
-    responsive: true,
-    interaction: {
-        mode: 'index',
-        intersect: false,
-    },
-});
-
-function ReportChart({ data }) {  // Nhận dữ liệu từ props
-    const [chartData, setChartData] = useState({
-        chart_1: {
-            labels: ['Máy in A1', 'Máy in B2', 'Máy in C3'],
-            datasets: [{
-                label: "Tổng số đơn đặt hàng",
-                backgroundColor: ['#FF6384', '#36A2EB'],
-                data: [10, 15, 12],
-            }],
-        },
-        chart_2: {
-            labels: ['Máy in A1', 'Máy in B2', 'Máy in C3'],
-            datasets: [
-                { label: "Tổng số lượng giấy A3", backgroundColor: '#FFCE56', data: [5, 8, 6] },
-                { label: "Tổng số lượng giấy A4", backgroundColor: '#4BC0C0', data: [20, 30, 25] },
-            ],
-        },
-    });
+function ReportChart({ data }) {
+    const [chartData, setChartData] = useState([]);
+    const [showBarChart, setShowBarChart] = useState(true); // Điều khiển chuyển đổi cho tất cả các biểu đồ
 
     useEffect(() => {
         if (data && data.length > 0) {
-            setChartData({
-                chart_1: {
-                    labels: data.map(item => item.name),
-                    datasets: [{
-                        label: "Số lượng đơn đặt hàng",
-                        backgroundColor: '#FF6384',
-                        data: data.map(item => item.quantity),
-                    }],
-                },
-                chart_2: {
-                    labels: data.map(item => item.name),
-                    datasets: [
-                        {
-                            label: "Số trang giấy A3",
-                            backgroundColor: '#FFCE56',
-                            data: data.map(item => item.quantity),  // Ví dụ dữ liệu
-                        },
-                        {
-                            label: "Số trang giấy A4",
-                            backgroundColor: '#4BC0C0',
-                            data: data.map(item => item.revenue),  // Ví dụ dữ liệu
-                        },
-                    ],
-                },
-            });
+            setChartData(data);
         }
     }, [data]);
 
+    const pieChartData = [
+        { name: "Giấy A3", value: chartData.reduce((total, item) => total + item.paperA3, 0) },
+        { name: "Giấy A4", value: chartData.reduce((total, item) => total + item.paperA4, 0) },
+      ];
+
+    const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'];
+
     return (
-        <div className="row text-center justify-content-around mt-5">
-            <h3 className='col-12 m-2'>Biểu đồ thống kê số đơn đặt hàng</h3>
-            <div className="col-6 m-3">
-                <Bar data={chartData.chart_1} options={option('Biểu đồ cột')} />
-            </div>
-            <div className="col-3 m-3">
-                <Pie data={chartData.chart_1} options={option('Biểu đồ tròn')} />
-            </div>
-            <h3 className='col-12 m-2'>Biểu đồ thống kê các loại giấy in</h3>
-            <div className="col-6 m-3">
-                <Bar data={chartData.chart_2} options={option('Biểu đồ cột')} />
+        <div className="container text-center mt-5">
+            <h2 className="mb-4">
+                {showBarChart ? "Thống kê dữ liệu - Dạng Cột" : "Thống kê dữ liệu - Dạng Tròn"}
+            </h2>
+            <button
+                className="btn btn-primary mb-4"
+                onClick={() => setShowBarChart(!showBarChart)}
+            >
+                {showBarChart ? "Chuyển sang dạng tròn" : "Chuyển sang dạng cột"}
+            </button>
+            <div className="row justify-content-around">
+                {/* Biểu đồ số đơn đặt hàng */}
+                <div className="col-md-4 mb-4">
+                    <h4>Số đơn đặt hàng</h4>
+                    {showBarChart ? (
+                        <BarChart
+                            width={400}
+                            height={300}
+                            data={chartData}
+                            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="quantity" fill="#FF6384" name="Số lượng đơn" />
+                        </BarChart>
+                    ) : (
+                        <PieChart width={300} height={300}>
+                            <Pie
+                                data={chartData}
+                                dataKey="quantity"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={100}
+                                fill="#8884d8"
+                                label
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                        </PieChart>
+                    )}
+                </div>
+
+                {/* Biểu đồ số lượng giấy A3 và A4 */}
+                <div className="col-md-4 mb-4">
+                    <h4>Số lượng giấy A3 & A4</h4>
+                    {showBarChart ? (
+                        <BarChart
+                            width={400}
+                            height={300}
+                            data={chartData}
+                            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="paperA3" fill="#36A2EB" name="Giấy A3" />
+                            <Bar dataKey="paperA4" fill="#FFCE56" name="Giấy A4" />
+                        </BarChart>
+                    ) : (
+                        <PieChart width={300} height={300}>
+                            <Pie
+                                data={pieChartData}
+                                dataKey="value"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={100}
+                                fill="#8884d8"
+                                label
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                        </PieChart>
+                    )}
+                </div>
+
+                {/* Biểu đồ doanh thu */}
+                <div className="col-md-4 mb-4">
+                    <h4>Doanh thu</h4>
+                    {showBarChart ? (
+                        <BarChart
+                            width={400}
+                            height={300}
+                            data={chartData}
+                            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="revenue" fill="#4BC0C0" name="Doanh thu" />
+                        </BarChart>
+                    ) : (
+                        <PieChart width={300} height={300}>
+                            <Pie
+                                data={chartData}
+                                dataKey="revenue"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={100}
+                                fill="#8884d8"
+                                label
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                        </PieChart>
+                    )}
+                </div>
             </div>
         </div>
     );

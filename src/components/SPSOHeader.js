@@ -22,6 +22,7 @@ export default function AppSPSOHeader(){
                         <Nav.Link as={Link} to="/printers">Máy in</Nav.Link>
                         <Nav.Link as={Link} to="/printSetting">Cấu hình in</Nav.Link>
                         <Nav.Link as={Link} to="/printreport">Report</Nav.Link>
+                        <Nav.Link as={Link} to="/usersupport">Hỗ trợ</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

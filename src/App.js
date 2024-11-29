@@ -23,6 +23,7 @@ import AppSPSOHeader from './components/SPSOHeader';
 import AppSPSOHero from './components/SPSOHero';
 import PrintReport from './pages/PrintReport';
 import PrintReportDetail from './pages/PrintReportDetail';
+import UserSupport from './pages/UserSupport';
 function App() {
   return (
     <BrowserRouter>
@@ -49,6 +50,8 @@ function App() {
         <Route path="/printSetting" element={<PrintSetting />} />
         <Route path="/printreport" element={<PrintReport />} />
         <Route path="/printreportdetail" element={<PrintReportDetail />} />
+        <Route path="/printreportdetail" element={<UserSupport />} />
+        <Route path="/usersupport" element={<UserSupport />} />
       </Routes>
       </main>
       <footer id="footer">
@@ -65,7 +68,7 @@ function HeaderSwitcher() {
   if (location.pathname === "/" || location.pathname === "/choice" || location.pathname === "/login" || location.pathname === "/guest") {
     return <GuestAppHeader />;  // Render the second header for the '/setup' route
   }
-  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/report")
+  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/printreport" || location.pathname === "/usersupport")
   {
     return <AppSPSOHeader/>;
   }
