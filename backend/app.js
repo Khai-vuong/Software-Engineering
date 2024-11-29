@@ -3,11 +3,11 @@ const session = require('express-session');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const sposRoutes = require('./routes/sposRoutes');
+const paymentRoutes = require('./src/payment');
 
 const app = express();
 const PORT = 4000;
-
-const paymentRoutes = require('./src/payment'); // Import the payment router
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -25,6 +25,7 @@ app.use(session({
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/spos', sposRoutes);
 app.use('/payment', paymentRoutes);
 
 app.listen(PORT, () => {

@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 
 router.post('/create', (req, res) => {
   const user = req.session.username  // Get the user from the session
+  console.log(user);
   if (!user) {
     
     res.status(401).json({ message: 'Not logged in' });

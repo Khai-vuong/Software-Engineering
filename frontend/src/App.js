@@ -19,6 +19,7 @@ import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
 import AppPrintStatus from './components/Print_Status';
 import Layout from './components/SPSOConfig';
+import AppSposHistory from './pages/SposHistory';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
         <Route path="/user" element={<AppUser />} /> {/* user */}
+        <Route path="/sposhistory" element={<AppSposHistory />} /> {/* user */}
       </Routes>
       </main>
       <footer id="footer">
