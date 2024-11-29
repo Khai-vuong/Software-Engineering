@@ -1,0 +1,15 @@
+/* Ví dụ CSS cho header và footer */
+header, footer {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 100;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}

@@ -17,8 +17,12 @@ import Choice from './components/Choice';
 import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
 import AppPrintStatus from './components/Print_Status';
-import Layout from './components/SPSOConfig';
-
+import PrintSetting from "./components/PrintSetting";
+import PrinterList from "./components/PrinterList";
+import AppSPSOHeader from './components/SPSOHeader';
+import AppSPSOHero from './components/SPSOHero';
+import PrintReport from './pages/PrintReport';
+import PrintReportDetail from './pages/PrintReportDetail';
 function App() {
   return (
     <BrowserRouter>
@@ -31,7 +35,7 @@ function App() {
         <Route path="/" element={<AppLandingHero/>} /> {/* Default route */}
         <Route path="/choice" element={<Choice/>} /> {/* Choice */}
         <Route path="/login" element={<Login/>} /> {/* Log in */}
-        <Route path="/loginasstaff" element={<Layout/>} /> {/* Log in */}
+        <Route path="/loginasstaff" element={<AppSPSOHero/>} /> {/* Log in */}
         <Route path="/guest" element={<AppGuestHero/>} /> {/* Guest */}
         <Route path="/logedin" element={<AppHero/>} /> {/* Loged in */}
         <Route path="/print" element={<Print />} /> {/* Route for print config */}
@@ -41,6 +45,10 @@ function App() {
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
         <Route path="/user" element={<AppUser />} /> {/* user */}
+        <Route path="/printers" element={<PrinterList />} />
+        <Route path="/printSetting" element={<PrintSetting />} />
+        <Route path="/printreport" element={<PrintReport />} />
+        <Route path="/printreportdetail" element={<PrintReportDetail />} />
       </Routes>
       </main>
       <footer id="footer">
@@ -57,7 +65,10 @@ function HeaderSwitcher() {
   if (location.pathname === "/" || location.pathname === "/choice" || location.pathname === "/login" || location.pathname === "/guest") {
     return <GuestAppHeader />;  // Render the second header for the '/setup' route
   }
-
+  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/report")
+  {
+    return <AppSPSOHeader/>;
+  }
 
   return <AppHeader />;  // Render the first header for all other routes
 }

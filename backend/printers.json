@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Printer 1",
+    "enabled": false
+  },
+  {
+    "name": "Printer 2",
+    "enabled": false
+  },
+  {
+    "name": "Printer 3",
+    "enabled": false
+  },
+  {
+    "name": "Printer 4",
+    "enabled": false
+  },
+  {
+    "name": "Printer 5",
+    "enabled": false
+  },
+  {
+    "name": "Printer6",
+    "enabled": false
+  }
+]
