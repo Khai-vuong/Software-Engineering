@@ -17,6 +17,16 @@ const writeUserData = (users) => {
   fs.writeFileSync(userDataFile, JSON.stringify(users, null, 2));
 };
 
+const readUserData = () => {
+  try {
+    const data = fs.readFileSync(userDataFile, 'utf8');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading user data:', error);
+    return [];
+  }
+};
+
 const readPrintHistoryData = () => {
     try {
       const data = fs.readFileSync(print_historyDataFile, 'utf8');
@@ -27,8 +37,15 @@ const readPrintHistoryData = () => {
     }
   };
 
-const PrintingStas = () =>{}
-const getAllUser = () =>{}
-const getAllPrintHistory = () =>{}
+const PrintingStas = () =>{
 
-module.exports = {};
+  
+}
+const getAllUser = () => {
+  return readUserData();
+}
+const getAllPrintHistory = () => {
+  return readPrintHistoryData();
+}
+
+module.exports = {getAllUser, getAllPrintHistory};

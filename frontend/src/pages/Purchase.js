@@ -66,7 +66,7 @@ function PurchaseHistory(props) {
       </Modal>
       );
     }
-   
+
 
 function AppPurchase() {
     const [modalShow, setModalShow] = React.useState(false)
@@ -90,7 +90,7 @@ function AppPurchase() {
         pageNumber: document.querySelector('input[type="page"]').value,
         paymentMethod: document.querySelector('select').value
       };
-    
+
       // Update state with extracted form data
       setFormData(formValues);
 
@@ -101,7 +101,7 @@ function AppPurchase() {
       })
       .then((response) => {
           console.log(response);
-      }).catch((error) => { 
+      }).catch((error) => {
 
           console.log(error);
       }).finally(() => {
@@ -152,7 +152,7 @@ function AppPurchase() {
             </div>
             </Form>
 
-            
+
         </Container>
       </section>
     );

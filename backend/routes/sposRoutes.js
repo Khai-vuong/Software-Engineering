@@ -1,9 +1,10 @@
 const express = require('express');
-const { registerUser, loginUser } = require('../controllers/authController');
+const { getAllUser, getAllPrintHistory } = require('../controllers/sposController');
 
 const router = express.Router();
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
+router.get('/getAllUser', getAllUser);
+router.get('/getAllPrintHistory', getAllPrintHistory);
+// router.put('/changeUser', putUsername);
 
 module.exports = router;
