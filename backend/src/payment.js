@@ -9,6 +9,9 @@ const purchaseHistory = require('../storage/purchase_history');
     
   param: body: { pageNumber : int, paymentMethod: string }
   return: { message: string }
+
+  GET /payment/history: Lấy lịch sử mua giấy của user
+  return { data: [] }
 */
 
 // Define routes
@@ -42,9 +45,12 @@ router.post('/create', (req, res) => {
   res.json({ message: 'Payment created successfully' });
 });
 
-router.get('/:id', (req, res) => {
-  const paymentId = req.params.id;
-  res.send(`Payment details for ID: ${paymentId}`);
+router.get('/history', (req, res) => {
+  const userName = req.session.username;
+  const userHistory = purchaseHistory.data.filter(entry => entry.name === userName);
+  console.log(`User ${userName} has purchased:`, userHistory);
+
+  res.json(userHistory);
 });
 
 module.exports = router; // Export the router

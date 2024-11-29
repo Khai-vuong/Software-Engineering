@@ -6,9 +6,29 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function PurchaseHistory(props) {
+      const [logs, setLogs] = useState([]);
+
+      useEffect(() => {
+
+        if (props.show) {
+          axios.get('http://localhost:4000/payment/history', {
+            withCredentials: true,
+          })
+            .then((response) => {
+              setLogs(response.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching logs:', error);
+            }).finally(() => {
+              console.log('Logs fetched:', logs);
+            });
+        }
+
+      }, [props.show]);
+
     return (
       <Modal
         {...props}
@@ -26,41 +46,17 @@ function PurchaseHistory(props) {
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Số lượng (A4)</th>
-                    <th>Số tiền</th>
-                    <th>Ngày thanh toán</th>
-                    <th>Trạng thái</th>
+                    <th>Nội dung</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
+                {logs.map((log, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{log.content}</td>
+                  </tr>
+                ))}
                 </tbody>
             </Table>
         </Modal.Body>
@@ -68,8 +64,9 @@ function PurchaseHistory(props) {
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
-    );
-  }
+      );
+    }
+   
 
 function AppPurchase() {
     const [modalShow, setModalShow] = React.useState(false)
@@ -79,13 +76,13 @@ function AppPurchase() {
     });
 
     const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value
-      });
+      // const { name, value } = e.target;
+      // setFormData((prevFormData) => ({
+      //   ...prevFormData,
+      //   [name]: value
+      // }));
     };
-  
+
     const submitHandler = (e) => {
       e.preventDefault();
 
@@ -97,9 +94,11 @@ function AppPurchase() {
       // Update state with extracted form data
       setFormData(formValues);
 
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', formValues);
 
-      axios.post('http://localhost:4000/payment/create', formData)
+      axios.post('http://localhost:4000/payment/create', formData, {
+        withCredentials: true
+      })
       .then((response) => {
           console.log(response);
       }).catch((error) => { 
