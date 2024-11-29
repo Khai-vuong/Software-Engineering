@@ -99,7 +99,9 @@ function AppPurchase() {
 
       console.log('Form submitted:', formData);
 
-      axios.post('http://localhost:4000/payment/create', formData)
+      axios.post('http://localhost:4000/payment/create', formData, {
+        withCredentials: true // Include credentials in the request
+      })
       .then((response) => {
           console.log(response);
       }).catch((error) => { 

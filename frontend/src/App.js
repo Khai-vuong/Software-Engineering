@@ -44,6 +44,8 @@ function App() {
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
         <Route path="/user" element={<AppUser />} /> {/* user */}
+        <Route path="/sposhistory" element={<AppSposHistory />} /> {/* spos
+ */}
         <Route path="/sposhistory" element={<AppSposHistory />} /> {/* user */}
       </Routes>
       </main>
