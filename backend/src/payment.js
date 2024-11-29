@@ -1,12 +1,13 @@
 const express = require('express');
 const database = require('../storage/database');
 const router = express.Router();
+const purchaseHistory = require('../storage/purchase_history');
 
 /*
   Các routes dùng cho thanh toán Page (mua giấy trên BK pay)
   POST /payment/create: Tạo một thanh toán mới
     
-  param: body: { pageNumber : int}
+  param: body: { pageNumber : int, paymentMethod: string }
   return: { message: string }
 */
 
@@ -18,7 +19,8 @@ router.get('/', (req, res) => {
 router.post('/create', (req, res) => {
   const user = req.session.username  // Get the user from the session
   if (!user) {
-    res.status(301).json({ message: 'Not logged in' });
+    
+    res.status(401).json({ message: 'Not logged in' });
     return;
   }
 
@@ -28,11 +30,13 @@ router.post('/create', (req, res) => {
     BuyTime: new Date().toISOString(),
     NumberOfPage: req.body.pageNumber,
     Status: 'Paid',
-    User: user.username
+    User: user
   }
 
   database.PageOrder.push(paymentDetails);
+  purchaseHistory.data.push({name: user, content: `Đã mua ${req.body.pageNumber} trang giấy qua ${req.body.paymentMethod}`});
 
+  console.log(purchaseHistory);
   res.json({ message: 'Payment created successfully' });
 });
 

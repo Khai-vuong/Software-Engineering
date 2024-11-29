@@ -16,7 +16,7 @@ const database = {
         "Email": "user1@example.com",
         "Password": "aaa",
         "LastUse": "2024-11-01T10:00:00Z",
-        "Balance": 100.0,
+        "Balance": 100,
         "Type": "Regular"
       }
     ],

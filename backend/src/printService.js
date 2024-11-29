@@ -47,6 +47,10 @@ router.post('/setup', (req, res) => {
       };
 
     database.PrintOrder.push(newPrintOrder);
+
+      //Đẩy lịch sử in
+
+
     res.status(201).json({ message: 'Print order created successfully' });
 });
 

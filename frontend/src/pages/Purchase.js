@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
+import { useState } from 'react';
 
 function PurchaseHistory(props) {
     return (
@@ -71,6 +73,34 @@ function PurchaseHistory(props) {
 
 function AppPurchase() {
     const [modalShow, setModalShow] = React.useState(false)
+    const [formData, setFormData] = useState({
+      pageNumber: 0,
+      paymentMethod: ''
+    });
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+  
+    const submitHandler = (e) => {
+      e.preventDefault();
+
+      axios.post('http://localhost:4000/payment/create', formData)
+      .then((response) => {
+          console.log(response);
+      }).catch((error) => { 
+          console.log(error);
+      }).finally(() => {
+        alert(`you bought ${document.querySelector('input[type="page"]').value} pages by ${document.querySelector('select').value}`);
+      });
+
+      console.log('Form submitted:', formData);
+    };
+
     return (
       <section id="hero" className="block hero-block">
         <Container fluid>
@@ -87,7 +117,7 @@ function AppPurchase() {
                     onHide={() => setModalShow(false)}
                 />
             </div>
-            <Form>
+            <Form  onSubmit={submitHandler}>
                 <Form.Group className="mb-3" controlId="">
                     <Form.Label>Nhập số trang cần mua:</Form.Label>
                     <Form.Control type="page" placeholder="Nhập số trang" />
@@ -99,17 +129,18 @@ function AppPurchase() {
                     <Form.Label>Phương thức thanh toán:</Form.Label>
                     <Form.Select aria-label="Default select example">
                     <option>Nhấn vào để chọn</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="bkpay">BKPay</option>
+                    <option value="momo">Momo</option>
+                    <option value="bank">Ngân hàng</option>
                 </Form.Select>
                 </Form.Group>
-            </Form>
             <div className="title-holder">
             <Button variant="primary" type="submit">
                     Xác nhận
             </Button>
             </div>
+            </Form>
+
             
         </Container>
       </section>
