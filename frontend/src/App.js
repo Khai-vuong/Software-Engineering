@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import ReactDOM from 'react-dom';
 import { CookiesProvider } from 'react-cookie';
 
 import { BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
@@ -18,7 +19,7 @@ import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
 import AppPrintReport from './pages/PrintReport';
 import AppPrintReportDetail from './pages/PrintReportDetail';
-
+import UserSupport from './pages/UserSupport';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
         <Route path="/printreport" element={<AppPrintReport />} />
         <Route path="/printreportdetail" element={<AppPrintReportDetail />} />
+        <Route path="/usersupport" element={<UserSupport />} />
       </Routes>
       </main>
       <footer id="footer">

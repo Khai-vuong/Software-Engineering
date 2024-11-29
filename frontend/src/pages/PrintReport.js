@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FilterBar from "../components/print_report/FilterBar";
 import ReportTable from "../components/print_report/ReportTable";
+import Container from 'react-bootstrap/Container';
 import Loading from '../components/Loading';
-import '../components/css/Report.css'
 
 function PrintReport() {
     const navigate = useNavigate();
@@ -46,10 +46,12 @@ function PrintReport() {
     };
 
     return (
-        <div className="container-fluid">
-            <div className="row justify-content-center p-4">
-                <h1 className="col-12 text-center pb-3 mt-5">Báo cáo hệ thống</h1>
-                <div className="col-12 text-bold mx-1">
+        <section id="hero" className="block hero-block">
+            <Container fluid>
+                <div className="title-holder">
+                    <h2>Báo cáo hệ thống</h2>
+                </div>
+                <div className="container-fluid">
                     <FilterBar 
                         minMonth={minMonth} 
                         minYear={minYear}
@@ -65,8 +67,8 @@ function PrintReport() {
                         onRowClick={handleRowClick}
                     />
                 </div>
-            </div>
-        </div>
+            </Container>
+        </section>
     );
 }
 
