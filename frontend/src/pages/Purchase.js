@@ -73,7 +73,7 @@ function PurchaseHistory(props) {
 
 function AppPurchase() {
     const [modalShow, setModalShow] = React.useState(false)
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = React.useState({
       pageNumber: 0,
       paymentMethod: ''
     });
@@ -89,13 +89,25 @@ function AppPurchase() {
     const submitHandler = (e) => {
       e.preventDefault();
 
+      const formValues = {
+        pageNumber: document.querySelector('input[type="page"]').value,
+        paymentMethod: document.querySelector('select').value
+      };
+    
+      // Update state with extracted form data
+      setFormData(formValues);
+
+      console.log('Form submitted:', formData);
+
       axios.post('http://localhost:4000/payment/create', formData)
       .then((response) => {
           console.log(response);
       }).catch((error) => { 
+
           console.log(error);
       }).finally(() => {
         alert(`you bought ${document.querySelector('input[type="page"]').value} pages by ${document.querySelector('select').value}`);
+        console.log('Form submitted:', formData);
       });
 
       console.log('Form submitted:', formData);
@@ -120,19 +132,19 @@ function AppPurchase() {
             <Form  onSubmit={submitHandler}>
                 <Form.Group className="mb-3" controlId="">
                     <Form.Label>Nhập số trang cần mua:</Form.Label>
-                    <Form.Control type="page" placeholder="Nhập số trang" />
+                    <Form.Control type="page" placeholder="Nhập số trang" onChange={handleChange}/>
                     <Form.Text className="text-muted">
                     Lưu ý: số trang phải lớn hơn 1.
                     </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="">
                     <Form.Label>Phương thức thanh toán:</Form.Label>
-                    <Form.Select aria-label="Default select example">
-                    <option>Nhấn vào để chọn</option>
-                    <option value="bkpay">BKPay</option>
-                    <option value="momo">Momo</option>
-                    <option value="bank">Ngân hàng</option>
-                </Form.Select>
+                    <Form.Select aria-label="Default select example" onChange={handleChange}>
+                        <option>Nhấn vào để chọn</option>
+                        <option value="bkpay">BKPay</option>
+                        <option value="momo">Momo</option>
+                        <option value="bank">Ngân hàng</option>
+                    </Form.Select>
                 </Form.Group>
             <div className="title-holder">
             <Button variant="primary" type="submit">
@@ -146,4 +158,5 @@ function AppPurchase() {
       </section>
     );
   }
+
   export default AppPurchase;
