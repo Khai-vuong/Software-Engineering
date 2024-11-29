@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function Save(props) {
     const location = useLocation();
@@ -58,19 +59,31 @@ function Print_Config() {
             uri: require('../assets/images/patients.csv')
         }
       ];
-    
+   
+      const [printers, setPrinters] = useState([]);
+      const [isCustomSelected, setIsCustomSelected] = useState(false);
+      const [filePreview, setFilePreview] = useState(docs); 
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';  // Disable scroll
 
+        //Init the printers
+        axios.get('http://localhost:4000/printing/printerList')
+        .then(response => {
+        setPrinters(response.data.printers);
+        })
+        .catch(error => {
+        console.error('There was an error fetching the printer list!', error);
+        });
+
+        //IDK what this is for, so Imma leave it as it is! __Khair Backend
         // Cleanup: restore scroll behavior when the component unmounts or changes
         return () => {
             document.body.style.overflow = 'auto';  // Enable scroll again
         };
     }, []);
 
-    const [isCustomSelected, setIsCustomSelected] = useState(false);
-    const [filePreview, setFilePreview] = useState(docs);
+
     const handleSelectChange = (e) => { 
         if (e.target.value === "0") { 
             setIsCustomSelected(true); 
@@ -109,10 +122,11 @@ function Print_Config() {
                                 <Form className='normal-font' style={{ maxWidth:"40%"}} >
 
                                     <Form.Select aria-label="Printer" style={{marginTop:"15%", marginBottom:"16%"}}> 
-                                    <option value="1">Máy in 1</option>
-                                    <option value="2">Máy in 2</option>
-                                    <option value="3">Máy in 3</option>
-                                    <option value="4">Máy in 4</option>
+
+                                    {printers.map((printer, index) => (
+                                        <option key={index} value={index}>{printer}</option>
+                                    ))}
+                                    
                                     </Form.Select>
 
                                     <Form.Select aria-label="Default select example" className="form-style" onChange={handleSelectChange}> 

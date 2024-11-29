@@ -9,6 +9,7 @@ const router = express.Router();
 
     POST /setup: Tạo một order in mới
     params: body: {
+        printerName: string,
         numberOfPage: int,
         numberOfCopy: int,
         ratio: string, 
@@ -54,12 +55,15 @@ router.post('/setup', (req, res) => {
     res.status(201).json({ message: 'Print order created successfully' });
 });
 
+//Works
 router.get('/printerList', (req, res) => {
     const printers = database.Printer;
-    const result = [];
-    for (let i = 0; i < printers.length; i++) {
-        result.push( printers[i].PName);
-    }
+    console.log(printers);
+
+    const printerNames = printers.map(printer => printer.PName);
+
+    console.log(printerNames);
+    res.status(200).json({ printers: printerNames });
 });
 
 

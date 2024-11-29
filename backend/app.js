@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const sposRoutes = require('./routes/sposRoutes');
 const paymentRoutes = require('./src/payment');
+const printingRoutes = require('./src/printService');
 
 const app = express();
 const PORT = 4000;
@@ -27,6 +28,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/spos', sposRoutes);
 app.use('/payment', paymentRoutes);
+app.use('/printing', printingRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
