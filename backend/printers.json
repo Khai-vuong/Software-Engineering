@@ -1,7 +1,7 @@
 [
   {
     "name": "Printer 1",
-    "enabled": false
+    "enabled": true
   },
   {
     "name": "Printer 2",

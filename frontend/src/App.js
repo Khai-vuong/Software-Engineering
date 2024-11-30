@@ -25,6 +25,7 @@ import AppSPSOHeader from './components/SPSOHeader';
 import AppSPSOHero from './components/SPSOHero';
 import PrintReport from './pages/PrintReport';
 import PrintReportDetail from './pages/PrintReportDetail';
+import AppSposHistory from './pages/SposHistory'
 
 function App() {
   return (
