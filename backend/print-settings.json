@@ -1,0 +1,9 @@
+{
+  "defaultPages": 10,
+  "resetDate": "2024-12-01",
+  "permittedFileTypes": [
+    "pdf",
+    "jpg",
+    "png"
+  ]
+}
