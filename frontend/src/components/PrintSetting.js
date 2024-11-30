@@ -6,7 +6,7 @@ function PrintSetting() {
     const [defaultPages, setDefaultPages] = useState(10);
     const [resetDate, setResetDate] = useState('');
     const [permittedFileTypes, setPermittedFileTypes] = useState([]);
-    const [allFileTypes, setAllFileTypes] = useState([]); // Tất cả các loại file từ JSON
+    const [allFileTypes, setAllFileTypes] = useState([]);
 
     // State to control if we are in "edit" mode
     const [isEditing, setIsEditing] = useState(false);

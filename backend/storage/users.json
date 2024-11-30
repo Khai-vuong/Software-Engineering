@@ -18,7 +18,7 @@
       "name": "Thanh Dat",
       "email": "123@gmail.com",
       "phone_num": "123-456-7890",
-      "balance": 19,
+      "balance": 32,
       "address": "Di An, Binh Duong"
     },
     "pay_history": [
@@ -31,6 +31,16 @@
         "pageNumber": 5,
         "paymentMethod": "Momo",
         "timestamp": "2024-11-30T06:46:21.102Z"
+      },
+      {
+        "pageNumber": 1,
+        "paymentMethod": "Ngân hàng",
+        "timestamp": "2024-11-30T08:58:15.353Z"
+      },
+      {
+        "pageNumber": 12,
+        "paymentMethod": "Ngân hàng",
+        "timestamp": "2024-11-30T10:03:28.964Z"
       }
     ]
   }

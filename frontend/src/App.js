@@ -18,14 +18,15 @@ import Choice from './components/Choice';
 import AppLandingHero from './components/LandingHero';
 import AppGuestHero from './components/GuestHero';
 import AppPrintStatus from './components/Print_Status';
-import Layout from './components/SPSOConfig';
+// import Layout from './components/SPSOConfig';
 import PrintSetting from "./components/PrintSetting";
 import PrinterList from "./components/PrinterList";
 import AppSPSOHeader from './components/SPSOHeader';
 import AppSPSOHero from './components/SPSOHero';
 import PrintReport from './pages/PrintReport';
 import PrintReportDetail from './pages/PrintReportDetail';
-import AppSposHistory from './pages/SposHistory'
+//!
+// import AppSposHistory from './pages/SposHistory'
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
         <Route path="/help" element={<AppHelp />} /> {/* Help */}
         <Route path="/user" element={<AppUser />} /> {/* user */}
-        <Route path="/sposhistory" element={<AppSposHistory />} /> {/* spos*/}
+        {/* <Route path="/sposhistory" element={<AppSposHistory />} /> referrenceeeeeeeee !!!!!!!! */}
         <Route path="/printers" element={<PrinterList />} />
         <Route path="/printSetting" element={<PrintSetting />} />
         <Route path="/printreport" element={<PrintReport />} />
@@ -67,12 +68,11 @@ function App() {
 }
 function HeaderSwitcher() {
   const location = useLocation(); // Get the current location
-
   // Conditionally render the header based on the current path
   if (location.pathname === "/" || location.pathname === "/choice" || location.pathname === "/login" || location.pathname === "/guest") {
     return <GuestAppHeader />;  // Render the second header for the '/setup' route
   }
-  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/report")
+  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/report" || location.pathname === "/printreport")
   {
     return <AppSPSOHeader/>;
   }

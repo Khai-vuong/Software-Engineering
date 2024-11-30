@@ -13,79 +13,72 @@ import { useNavigate } from 'react-router-dom';
 
 function Print() {
     useEffect(() => {
-        document.body.style.overflow = 'hidden';  // Disable scroll
-
-        // Cleanup: restore scroll behavior when the component unmounts or changes
+        document.body.style.overflow = 'hidden';
         return () => {
-            document.body.style.overflow = 'auto';  // Enable scroll again
+            document.body.style.overflow = 'auto';
         };
     }, []);
-    // Định dạng thêm ở đây nên đồng nhất với định dạng bên spso cập nhật
+
     const fileIconMap = {
         pdf: "bi bi-filetype-pdf",
         png: "bi bi-filetype-png",
         docx: "bi bi-filetype-docx",
         csv: "bi bi-filetype-csv",
         txt: "bi bi-filetype-txt",
-        // Add more extensions and their corresponding icons here
     };
     // Logic để xử lý icon ảnh
     const getFileIconClass = (filename) => {
         const extension = filename.split('.').pop().toLowerCase(); // Extract file extension
         return fileIconMap[extension] || null; // Default icon if no match
     };
+
     const navigate = useNavigate(); 
     const fileInputRef = useRef();
     const [showModal, setShowModal] = useState(false);
     const [unsupportedFile, setUnsupportedFile] = useState('');
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
 
     // File nếu > 100 MB thì không thể upload lên được, hiện thanh upload error
     // Tránh tình trạng upload file lớn quá database chịu không được
     const MAX_FILE_SIZE_MB = 100 * 1024 * 1024; 
 
-    const handleChange = (event) =>{
-        // do something with event data
-        const file = event.target.files[0];
-        if (!file) return;
-        const iconClass = getFileIconClass(file.name);
-        setSelectedFile(file);
-        if (!iconClass) {
-            // Show modal for unsupported file types
-            setUnsupportedFile(file.name);
-            setShowModal(true);
-            event.target.value = "";
-            return;
-        }
-
-        if (file.size > MAX_FILE_SIZE_MB) {
-            // File too large
-            const largeFile = {
-                id: Date.now(),
+    const handleChange = (event) => {
+        const file = Array.from(event.target.files);
+        file.forEach(file => {
+            const iconClass = getFileIconClass(file.name);
+            if (!iconClass) {
+                setUnsupportedFile(file.name);
+                setShowModal(true);
+                return;
+            }
+            if (file.size > MAX_FILE_SIZE_MB) {
+                const largeFile = {
+                    id: Date.now() + Math.random(), // Ensure unique ID
+                    name: getDisplayName(file.name),
+                    icon: getFileIconClass(file.name),
+                    progress: 0,
+                    status: 'Error',
+                    error: true,
+                    file: file // Store the actual file
+                };
+                setUploadedFiles((prevFiles) => [...prevFiles, largeFile]);
+                return;
+            }
+    
+            const newFile = {
+                id: Date.now() + Math.random(),
                 name: getDisplayName(file.name),
                 icon: getFileIconClass(file.name),
                 progress: 0,
-                status: 'Error',
-                error: true,
+                status: 'Uploading',
+                error: false,
+                file: file // Store the actual file
             };
-            setUploadedFiles((prevFiles) => [...prevFiles, largeFile]);
-            event.target.value = "";
-            return;
-        }
-
-        if (file) {
-            const newFile = {
-                id: Date.now(),
-                name: getDisplayName(file.name),
-                icon:getFileIconClass(file.name),
-                progress: 0, // Simulated progress
-                status: 'Uploading', // You can change this based on actual upload logic
-                error: false // Set true if there’s an error
-                };
             setUploadedFiles((prevFiles) => [...prevFiles, newFile]);
             simulateUploadProgress(newFile.id);
-        }
+        });
+        
         event.target.value = "";
     };
     
@@ -103,9 +96,8 @@ function Print() {
         };
 
         // Progress steps with delays
-        setTimeout(() => updateProgress(30, 'Uploading'), 1000); // After 1 second, progress = 30%
-        setTimeout(() => updateProgress(60, 'Uploading'), 2000); // After 2 seconds, progress = 60%
-        setTimeout(() => updateProgress(100, 'Completed'), 3000); // After 3 seconds, progress = 100%
+        setTimeout(() => updateProgress(60, 'Uploading'), 1000); // After 2 seconds, progress = 60%
+        setTimeout(() => updateProgress(100, 'Completed'), 2000); // After 3 seconds, progress = 100%
     };
 
     // Tên file nếu quá 30 chữ thì sẽ được thu gọn lại
@@ -130,8 +122,25 @@ function Print() {
     // Modal Pop up nếu sai định dạng
     const closeModal = () => setShowModal(false);
     const handleSetupClick = () => {
-        navigate('/setup', {state: {selectedFile}}); // Navigate to the print config page
-      };
+        if (uploadedFiles.length > 0) {
+            const completedFiles = uploadedFiles.filter(file => 
+                file.status === 'Completed' && !file.error
+            ).map(file => ({
+                id: file.id,
+                name: file.name,
+                icon: file.icon,
+                file: file.file  // Make sure we pass the actual File object
+            }));
+            
+            if (completedFiles.length > 0) {
+                navigate('/setup', { 
+                    state: { 
+                        files: completedFiles
+                    }
+                });
+            }
+        }
+    };
     return (
         <section id="hero" className="block hero-block" style={{ margin: '70px 50px 0'}}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
@@ -162,7 +171,7 @@ function Print() {
                         <div class="row">
 
                         <button onClick={()=>fileInputRef.current.click()} >Chọn tài liệu</button>
-                        <input onChange={handleChange} multiple={false} ref={fileInputRef} type='file'hidden/>
+                        <input onChange={handleChange} multiple={true} ref={fileInputRef} type='file'hidden/>
                         </div>
                     </div>
             </div>
