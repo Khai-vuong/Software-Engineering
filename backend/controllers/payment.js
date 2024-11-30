@@ -29,6 +29,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
+  console.log(req.data);
+
   try {
     const user = req.session.username;
     if (!user) {

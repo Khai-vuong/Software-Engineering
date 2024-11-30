@@ -18,6 +18,10 @@ const router = express.Router();
         pname: string 
     }
     return { message: string }
+
+    GET /balance: Lấy số dư của user
+    params: none
+    return { balance: int }
 */
 
 router.post('/setup', (req, res) => {
@@ -65,6 +69,28 @@ router.get('/printerList', (req, res) => {
     console.log(printerNames);
     res.status(200).json({ printers: printerNames });
 });
+
+router.get('/balance', (req, res) => {
+  const user = req.session.username;
+
+  if (!user) {
+      console.log('Not logged in');
+      res.status(301).json({ message: 'Not logged in' });
+      return;
+  }
+
+  const userBalance = database.Users.find(u => u.username === user)?.balance;
+
+  console.log('returned: ' + userBalance);
+
+  if (userBalance === undefined) {
+    res.status(404).json({ message: 'User not found' });
+    return;
+  }
+
+  res.status(200).json({ balance: userBalance });
+});
+
 
 
 module.exports = router;
