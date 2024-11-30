@@ -50,13 +50,21 @@ router.post('/create', (req, res) => {
     if (!currentUser.pay_history) {
       currentUser.pay_history = [];
     }
+    if (!currentUser.info.balance) {
+      currentUser.info.balance = 0;
+    }
+    currentUser.info.balance += parseInt(pageNumber);
     currentUser.pay_history.push({
       pageNumber: parseInt(pageNumber),
       paymentMethod,
       timestamp: new Date().toISOString()
     });
+
     fs.writeFileSync(userDataFile, JSON.stringify(users, null, 2));
-    return res.json({ message: 'Payment created successfully' });
+    return res.json({ 
+      message: 'Payment created successfully',
+      newBalance: currentUser.info.balance 
+    });
 
   } catch (error) {
     console.error('Error creating payment:', error);

@@ -23,9 +23,14 @@
     },
     "pay_history": [
       {
-        "pageNumber": "10",
+        "pageNumber": 10,
         "paymentMethod": "BKpay",
         "timestamp": "2024-11-30T06:20:17.439Z"
+      },
+      {
+        "pageNumber": 5,
+        "paymentMethod": "Momo",
+        "timestamp": "2024-11-30T06:46:21.102Z"
       }
     ]
   }
