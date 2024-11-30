@@ -23,21 +23,26 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }), // Send username and password
-        credentials: 'include', // Include credentials for session
+        body: JSON.stringify({ username, password }),
+        credentials: 'include',
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed'); // Use the error message from the response
+        throw new Error(errorData.message || 'Login failed');
       }
 
       const data = await response.json();
-      login(data.user.username); // Store the username in context
-      navigate('/logedin'); // Redirect to the logged-in page
+      login(data.user.username);
+      if(data.user.role === 'user'){
+        navigate('/logedin');
+      }
+      if(data.user.role === 'admin'){
+        navigate('/loginasstaff');
+      }
     } catch (error) {
       console.error('Error during login:', error);
-      setErrorMessage('Incorrect username or password. Try again.'); // Set error message
+      setErrorMessage('Incorrect username or password. Try again.'); 
     }
   };
 

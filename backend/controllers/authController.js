@@ -1,9 +1,20 @@
 const fs = require('fs');
 const userDataFile = './storage/users.json';
+const sposDataFile = './storage/spos.json';
 
 const readUserData = () => {
   try {
     const data = fs.readFileSync(userDataFile, 'utf8');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading user data:', error);
+    return [];
+  }
+};
+
+const readSposData = () => {
+  try {
+    const data = fs.readFileSync(sposDataFile, 'utf8');
     return data ? JSON.parse(data) : [];
   } catch (error) {
     console.error('Error reading user data:', error);
@@ -36,12 +47,18 @@ const loginUser = (req, res) => {
   const { username, password } = req.body;
   const users = readUserData();
   const user = users.find(user => user.username === username && user.password === password);
+
+  const sposs = readSposData(); // Corrected to readSposData() from readUserData()
+  const spos = sposs.find(spos => spos.username === username && spos.password === password);
   
-  if (user) {
-    req.session.username = user.username;
-    res.status(200).json({ message: 'Login successful', user: { username: user.username, info: user.info } });
-  } else {
+  if (!user && !spos) {
     res.status(401).json({ message: 'Invalid username or password' });
+  } else if (user && spos) {
+    res.status(401).json({ message: 'Invalid username or password' }); // Return error if both user and spos are found
+  } else {
+    req.session.username = user ? user.username : spos.username; // Set session username based on user or spos
+    res.status(200).json({ message: 'Login successful', user: user ? { username: user.username, info: user.info, role: "user" } 
+                                                                   : { username: spos.username, info: spos.info, role: "admin" } });
   }
 };
 
