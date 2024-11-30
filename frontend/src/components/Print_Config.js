@@ -10,13 +10,45 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 function Save(props) {
+    const searchParams = useSearchParams();
     const location = useLocation();
     const { file } = location.state || {}; // Access the file from the state
 
+    const [filename, setFilename] = useState('');
+    const [totalPage, setTotalPage] = useState(0);
+    const [numCopies, setNumCopies] = useState(4);
+    const [availablePages, setAvailablePages] = useState(25); 
+    const [balance, setBalance] = useState(0);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const fileNameFromParams = params.get('filename');
+        if (fileNameFromParams) {
+            setFilename(fileNameFromParams);
+        }
+
+        const randomTotalPage = Math.floor(Math.random() * 11) + 10;
+        setTotalPage(randomTotalPage);
+
+        //Ko gọi được API là vì sao?
+
+        axios.get('http://localhost:4000/printing/balance')
+            .then(response => {
+                alert('User balance: ' + response.data.balance);
+                console.log('User balance:', response.data.balance);
+                setAvailablePages(response.data.balance);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the user balance!', error);
+            });
+
+    }, [props.show]);
+
     // Now you can use the file as needed
-    console.log(file);
+    console.log('file: ' + JSON.stringify(location));
     return (
       <Modal
         {...props}
@@ -30,11 +62,11 @@ function Save(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{textAlign: 'center'}}>
-          <h3>File: A.docx, B.pdf, D.docx, E.pdf</h3>
+          <h3>File: {filename}</h3>
           {file && <h3>Uploaded File: {file.name}</h3>}
-          <h3>Số trang: 30</h3>
-          <h3>Số bản: 4</h3>
-          <h3>Số trang hiện có: 25</h3>
+          <h3>Số trang: {totalPage}</h3>
+          <h3>Số bản: {numCopies}</h3>
+          <h3>Số trang hiện có: {availablePages} </h3>
         </Modal.Body>
         <Modal.Footer>
             <Link to='/confirm'>
@@ -64,6 +96,8 @@ function Print_Config() {
       const [isCustomSelected, setIsCustomSelected] = useState(false);
       const [filePreview, setFilePreview] = useState(docs); 
 
+
+      
     useEffect(() => {
         document.body.style.overflow = 'hidden';  // Disable scroll
 

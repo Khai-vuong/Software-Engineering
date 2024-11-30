@@ -122,6 +122,7 @@ function Print() {
     // Modal Pop up nếu sai định dạng
     const closeModal = () => setShowModal(false);
     const handleSetupClick = () => {
+
         if (uploadedFiles.length > 0) {
             const completedFiles = uploadedFiles.filter(file => 
                 file.status === 'Completed' && !file.error
@@ -131,9 +132,11 @@ function Print() {
                 icon: file.icon,
                 file: file.file  // Make sure we pass the actual File object
             }));
+
+            const filename = completedFiles.length > 0 ? completedFiles[0].name : '';
             
             if (completedFiles.length > 0) {
-                navigate('/setup', { 
+                navigate(`/setup/?filename=${filename}`, { 
                     state: { 
                         files: completedFiles
                     }

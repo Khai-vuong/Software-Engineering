@@ -1,6 +1,6 @@
 // models/printerModel.js
 const fs = require('fs');
-const printersFile = './printers.json';
+const printersFile = './storage/printer.json';
 
 exports.readPrintersData = () => {
   try {
