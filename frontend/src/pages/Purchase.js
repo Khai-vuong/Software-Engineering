@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react';
 
 function PurchaseHistory(props) {
       const [logs, setLogs] = useState([]);
-
       useEffect(() => {
 
         if (props.show) {
@@ -18,15 +17,13 @@ function PurchaseHistory(props) {
             withCredentials: true,
           })
             .then((response) => {
+              console.log('Fetched logs:', response.data); 
               setLogs(response.data);
-            })
+          })
             .catch((error) => {
               console.error('Error fetching logs:', error);
-            }).finally(() => {
-              console.log('Logs fetched:', logs);
             });
         }
-
       }, [props.show]);
 
     return (
@@ -47,16 +44,24 @@ function PurchaseHistory(props) {
                 <tr>
                     <th>No</th>
                     <th>Nội dung</th>
-
+                    <th>Thời gian</th>
                 </tr>
                 </thead>
                 <tbody>
-                {logs.map((log, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{log.content}</td>
-                  </tr>
-                ))}
+                {(() => {
+                    const rows = [];
+                    for (let index = 0; index < logs.length; index++) {
+                        const entry = logs[index];
+                        rows.push(
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>Đã mua {entry.pageNumber} trang A4 qua {entry.paymentMethod}</td>
+                                <td>{entry.timestamp}</td>
+                            </tr>
+                        );
+                    }
+                    return rows;
+                })()}
                 </tbody>
             </Table>
         </Modal.Body>
@@ -70,92 +75,96 @@ function PurchaseHistory(props) {
 
 function AppPurchase() {
     const [modalShow, setModalShow] = React.useState(false)
-    const [formData, setFormData] = React.useState({
-      pageNumber: 0,
-      paymentMethod: ''
+    const [formData, setFormData] = useState({
+        pageNumber: '',
+        paymentMethod: ''
     });
 
     const handleChange = (e) => {
-      // const { name, value } = e.target;
-      // setFormData((prevFormData) => ({
-      //   ...prevFormData,
-      //   [name]: value
-      // }));
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const submitHandler = (e) => {
-      e.preventDefault();
+        e.preventDefault();
+        
+        // Validate form data
+        if (!formData.pageNumber || !formData.paymentMethod) {
+            alert('Please fill in all fields');
+            return;
+        }
 
-      const formValues = {
-        pageNumber: document.querySelector('input[type="page"]').value,
-        paymentMethod: document.querySelector('select').value
-      };
-
-      // Update state with extracted form data
-      setFormData(formValues);
-
-      console.log('Form submitted:', formValues);
-
-      axios.post('http://localhost:4000/payment/create', formData, {
-        withCredentials: true
-      })
-      .then((response) => {
-          console.log(response);
-      }).catch((error) => {
-
-          console.log(error);
-      }).finally(() => {
-        alert(`you bought ${document.querySelector('input[type="page"]').value} pages by ${document.querySelector('select').value}`);
-        console.log('Form submitted:', formData);
-      });
-
-      console.log('Form submitted:', formData);
+        axios.post('http://localhost:4000/payment/create', {
+            pageNumber: parseInt(formData.pageNumber),
+            paymentMethod: formData.paymentMethod
+        }, {
+            withCredentials: true
+        })
+        .then((response) => {
+            console.log('Response:', response);
+            alert(`You bought ${formData.pageNumber} pages by ${formData.paymentMethod}`);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Failed to process payment. Please try again.');
+        });
     };
 
     return (
-      <section id="hero" className="block hero-block">
-        <Container fluid>
-            <div className="title-holder">
-                <h2>Mua trang in</h2>
-            </div>
+        <section id="hero" className="block hero-block">
+            <Container fluid>
+                <div className="title-holder">
+                    <h2>Mua trang in</h2>
+                </div>
 
-            <div className="button-holder">
-                <Button variant="primary" onClick={() => setModalShow(true)}>
-                    Lịch sử
-                </Button>
-                <PurchaseHistory
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
-            </div>
-            <Form  onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlId="">
-                    <Form.Label>Nhập số trang cần mua:</Form.Label>
-                    <Form.Control type="page" placeholder="Nhập số trang" onChange={handleChange}/>
-                    <Form.Text className="text-muted">
-                    Lưu ý: số trang phải lớn hơn 1.
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="">
-                    <Form.Label>Phương thức thanh toán:</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={handleChange}>
-                        <option>Nhấn vào để chọn</option>
-                        <option value="bkpay">BKPay</option>
-                        <option value="momo">Momo</option>
-                        <option value="bank">Ngân hàng</option>
-                    </Form.Select>
-                </Form.Group>
-            <div className="title-holder">
-            <Button variant="primary" type="submit">
-                    Xác nhận
-            </Button>
-            </div>
-            </Form>
+                <div className="button-holder">
+                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                        Lịch sử
+                    </Button>
+                    <PurchaseHistory
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
+                </div>
+                <Form onSubmit={submitHandler}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Nhập số trang cần mua:</Form.Label>
+                        <Form.Control
+                            type="number"
+                            name="pageNumber"
+                            value={formData.pageNumber}
+                            onChange={handleChange}
+                            placeholder="Nhập số trang"
+                        />
+                        <Form.Text className="text-muted">
+                            Lưu ý: số trang phải lớn hơn 1.
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Phương thức thanh toán:</Form.Label>
+                        <Form.Select
+                            name="paymentMethod"
+                            value={formData.paymentMethod}
+                            onChange={handleChange}
+                        >
+                            <option value="">Nhấn vào để chọn</option>
+                            <option value="BKpay">BKPay</option>
+                            <option value="Momo">Momo</option>
+                            <option value="Ngân hàng">Ngân hàng</option>
+                        </Form.Select>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Xác nhận
+                    </Button>
+                </Form>
 
 
-        </Container>
-      </section>
+            </Container>
+        </section>
     );
-  }
+}
 
-  export default AppPurchase;
+export default AppPurchase;

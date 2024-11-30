@@ -5,8 +5,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const sposRoutes = require('./routes/sposRoutes');
-const paymentRoutes = require('./src/payment');
-const printingRoutes = require('./src/printService');
+const paymentRoutes = require('./controllers/payment');
+const printingRoutes = require('./controllers/printService');
 const printerRoutes = require('./routes/printerRoutes');
 const printerSettingRoutes = require('./routes/printerSettingRoutes');
 
@@ -32,6 +32,7 @@ app.use('/api/user', userRoutes);
 app.use('/spos', sposRoutes);
 app.use('/payment', paymentRoutes);
 app.use('/printing', printingRoutes);
+
 app.use('/api/printers', printerRoutes);
 app.use('/api/print-settings', printerSettingRoutes);
 

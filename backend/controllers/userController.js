@@ -33,7 +33,9 @@ const getUserInfo = (req, res) => {
         username: user.username,
         name: user.info.name,
         email: user.info.email,
-        phone_num: user.info.phone_num
+        phone_num: user.info.phone_num,
+        balance: user.info.balance,
+        address: user.info.address,
       });
     } else {
       res.status(404).json({ message: 'User not found' });

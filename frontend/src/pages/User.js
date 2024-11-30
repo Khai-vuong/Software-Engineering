@@ -47,11 +47,11 @@ const UserInfo = () => {
             <Text strong>Phone: </Text>
             <Text>{user.phone_num}</Text>
             <br />
-            <Text strong>Số dư trang: </Text>
-            <Text>{user.name}</Text>
+            <Text strong>Số dư trang (A4): </Text>
+            <Text>{user.balance}</Text>
             <br />
             <Text strong>Địa chỉ: </Text>
-            <Text>{user.name}</Text>
+            <Text>{user.address}</Text>
         </div>
         </Card>
       </Container>

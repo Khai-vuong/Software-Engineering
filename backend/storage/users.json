@@ -5,10 +5,11 @@
     "info": {
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "phone_num": "123-456-7890"
+      "phone_num": "123-456-7890",
+      "balance": 19,
+      "address": "Di An, Binh Duong"
     },
-    "print_history": [
-    ]
+    "pay_history": []
   },
   {
     "username": "tdat",
@@ -16,8 +17,16 @@
     "info": {
       "name": "Thanh Dat",
       "email": "123@gmail.com",
-      "phone_num": "1234"
+      "phone_num": "123-456-7890",
+      "balance": 19,
+      "address": "Di An, Binh Duong"
     },
-    "print_history": []
+    "pay_history": [
+      {
+        "pageNumber": "10",
+        "paymentMethod": "BKpay",
+        "timestamp": "2024-11-30T06:20:17.439Z"
+      }
+    ]
   }
 ]

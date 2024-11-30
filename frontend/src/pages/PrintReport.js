@@ -20,13 +20,23 @@ function PrintReport() {
 
     useEffect(() => {
         // Tạo dữ liệu mẫu
-        const sampleData = [
-            { id: 1, month: 1, year: 2020, value: 100 },
-            { id: 2, month: 2, year: 2020, value: 120 },
-            { id: 3, month: 3, year: 2020, value: 130 },
-        ];
-        setData(sampleData);
-        setLoading(false);
+        const fetchUser = async () => {
+            try {
+              const response = await fetch(`http://localhost:4000/api/printers/history`, {
+                credentials: 'include', // Include credentials for session
+              });
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              const data = await response.json();
+              setData(data);
+            } catch (error) {
+              console.error('Error fetching user data:', error);
+            } finally {
+              setLoading(false);
+            }
+          };
+        fetchUser();
     }, []);
 
     if (loading) {
