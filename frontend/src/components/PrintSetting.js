@@ -52,6 +52,7 @@ function PrintSetting() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    allFileTypes,
                     defaultPages,
                     resetDate,
                     permittedFileTypes,
