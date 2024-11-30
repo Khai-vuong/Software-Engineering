@@ -1,16 +1,18 @@
 [
-    {
-      "Location": "CS2-H6-106",
-      "PName": "Printer A",
-      "Brand": "BrandX",
-      "Model": "X123",
-      "Status": "Available"
-    },
-    {
-      "Location": "CS1-B1-201",
-      "PName": "Printer B",
-      "Brand": "BrandX",
-      "Model": "X123",
-      "Status": "Unavailable"
-    }
+  {
+    "Location": "CS2-H6-106",
+    "PName": "Printer A",
+    "Brand": "BrandX",
+    "Model": "X123",
+    "Status": "Available",
+    "enabled": false
+  },
+  {
+    "Location": "CS1-B1-201",
+    "PName": "Printer B",
+    "Brand": "BrandX",
+    "Model": "X123",
+    "Status": "Unavailable",
+    "enabled": false
+  }
 ]

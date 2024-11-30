@@ -4,10 +4,10 @@ import '../components/css/Hero.css';
 import axios from "axios";
 
 function PrinterList() {
-
     const [printers, setPrinters] = useState([]);
     const [showAddPrinterModal, setShowAddPrinterModal] = useState(false);
     const [newPrinterName, setNewPrinterName] = useState("");
+    const [newPrinterLocation, setNewPrinterLocation] = useState("CS2-H6-106");
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,7 +27,6 @@ function PrinterList() {
         }
     };
 
-    // Update printer status (enable/disable)
     const updatePrinterStatus = async (printerName, enabled) => {
         try {
             const response = await apiClient.put(`/printers/${printerName}/status`, { enabled });
@@ -38,10 +37,9 @@ function PrinterList() {
         }
     };
 
-    // Add a new printer
-    const addPrinter = async (printerName) => {
+    const addPrinter = async (printerName, location) => {
         try {
-            const response = await apiClient.post("/printers", { name: printerName });
+            const response = await apiClient.post("/printers", { PName: printerName, Location: location });
             return response.data;
         } catch (error) {
             console.error("Error adding printer: ", error);
@@ -64,11 +62,10 @@ function PrinterList() {
         loadPrinters();
     }, []);
 
-    // Toggle printer enabled/disabled status
     const togglePrinterStatus = async (printerName, enable) => {
         setPrinters((prevPrinters) =>
             prevPrinters.map((printer) =>
-                printer.name === printerName
+                printer.PName === printerName
                     ? { ...printer, enabled: !printer.enabled }
                     : printer
             )
@@ -80,7 +77,7 @@ function PrinterList() {
             console.error("Error updating printer status: ", error);
             setPrinters((prevPrinters) =>
                 prevPrinters.map((printer) =>
-                    printer.name === printerName
+                    printer.PName === printerName
                         ? { ...printer, enabled: !enable }
                         : printer
                 )
@@ -92,9 +89,10 @@ function PrinterList() {
         if (!newPrinterName.trim()) return;
 
         try {
-            const newPrinter = await addPrinter(newPrinterName.trim());
+            const newPrinter = await addPrinter(newPrinterName.trim(), newPrinterLocation);
             setPrinters((prevPrinters) => [...prevPrinters, newPrinter]);
             setNewPrinterName("");
+            setNewPrinterLocation("CS2-H6-106");
             setShowAddPrinterModal(false);
         } catch (error) {
             console.error("Error adding printer: ", error);
@@ -117,18 +115,22 @@ function PrinterList() {
                     {printers.map((printer, idx) => (
                         <ListGroup.Item
                             key={idx}
-                            className="d-flex justify-content-between align-items-center"
+                            className="d-flex flex-column"
                         >
-                            <span>{printer.name} ({printer.enabled ? "Kích hoạt" : "Vô hiệu hóa"})</span>
-                            <Button
-                                variant={printer.enabled ? "warning" : "success"}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    togglePrinterStatus(printer.name, !printer.enabled);
-                                }}
-                            >
-                                {printer.enabled ? "Vô hiệu hóa" : "Kích hoạt"}
-                            </Button>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <span>
+                                    <b>{printer.PName}</b> ({printer.enabled ? "Kích hoạt" : "Vô hiệu hóa"})
+                                </span>
+                                <Button
+                                    variant={printer.enabled ? "warning" : "success"}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        togglePrinterStatus(printer.PName, !printer.enabled);
+                                    }}
+                                >
+                                    {printer.enabled ? "Vô hiệu hóa" : "Kích hoạt"}
+                                </Button>
+                            </div>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
@@ -149,6 +151,16 @@ function PrinterList() {
                                     placeholder="Nhập tên máy in"
                                     value={newPrinterName}
                                     onChange={(e) => setNewPrinterName(e.target.value)} />
+                            </Form.Group>
+                            <Form.Group controlId="newPrinterLocation" className="mt-3">
+                                <Form.Label>Vị trí</Form.Label>
+                                <Form.Select
+                                    value={newPrinterLocation}
+                                    onChange={(e) => setNewPrinterLocation(e.target.value)}
+                                >
+                                    <option value="CS2-H6-106">CS2-H6-106</option>
+                                    <option value="CS1-B1-201">CS1-B1-201</option>
+                                </Form.Select>
                             </Form.Group>
                         </Form>
                     </Modal.Body>

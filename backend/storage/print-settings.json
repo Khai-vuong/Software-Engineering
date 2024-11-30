@@ -3,7 +3,15 @@
   "resetDate": "2024-12-01",
   "permittedFileTypes": [
     "pdf",
+    "docx",
+    "txt"
+  ],
+  "allFileTypes": [
+    "pdf",
     "jpg",
-    "png"
+    "png",
+    "doc",
+    "docx",
+    "txt"
   ]
 }

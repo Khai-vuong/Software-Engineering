@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = './print-settings.json';
+const path = './storage/print-settings.json';
 
 exports.readPrintSettings = () => {
   try {

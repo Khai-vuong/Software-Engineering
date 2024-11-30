@@ -9,10 +9,10 @@ exports.updatePrintSettings = (req, res) => {
     const { defaultPages, resetDate, permittedFileTypes, allFileTypes } = req.body;
   
     const newSettings = {
+      allFileTypes,
       defaultPages,
       resetDate,
-      permittedFileTypes,
-      allFileTypes,
+      permittedFileTypes
     };
     
     writePrintSettings(newSettings);

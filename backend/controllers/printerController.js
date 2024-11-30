@@ -11,16 +11,15 @@ exports.getPrinters = (req, res) => {
 
 exports.updatePrinterStatus = (req, res) => {
   const { printerName } = req.params;
-  const { name, enabled } = req.body;
-
+  const { PName, enabled } = req.body; // Changed 'name' to 'PName' to match the data structure
   const printers = readPrintersData();
-  const printerIndex = printers.findIndex(printer => printer.name === printerName);
+  const printerIndex = printers.findIndex(printer => printer.PName === printerName);
 
   if (printerIndex === -1) {
     return res.status(404).json({ message: 'Printer not found' });
   }
 
-  if (name) printers[printerIndex].name = name;
+  if (PName) printers[printerIndex].PName = PName;
   if (enabled !== undefined) printers[printerIndex].enabled = enabled;
 
   writePrintersData(printers);
@@ -29,22 +28,26 @@ exports.updatePrinterStatus = (req, res) => {
 
 
 exports.addPrinter = (req, res) => {
-    const { name, enabled } = req.body;
+    const { PName, enabled, Location, Brand, Model, Status } = req.body; // Added 'Brand', 'Model', and 'Status'
   
-    if (!name) {
+    if (!PName) {
       return res.status(400).json({ message: 'Printer name is required' });
     }
   
     const printers = readPrintersData();
   
-    const existingPrinter = printers.find(printer => printer.name === name);
+    const existingPrinter = printers.find(printer => printer.PName === PName);
     if (existingPrinter) {
       return res.status(400).json({ message: 'Printer already exists' });
     }
   
     const newPrinter = {
-      name,
+      PName,
       enabled: enabled !== undefined ? enabled : true,
+      Location,
+      Brand: Brand || "BrandX", // Default value for Brand
+      Model: Model || "X123", // Default value for Model
+      Status: Status || "Available" // Default value for Status
     };
   
     printers.push(newPrinter);
