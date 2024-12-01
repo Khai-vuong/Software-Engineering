@@ -2,7 +2,7 @@ import '../components/css/Hero.css';
 import '../components/css/Print_Config.css';
 import Form from 'react-bootstrap/Form';
 import FilePreview from '../components/File_Preview';
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import pdfFile from '../assets/images/N5-2018.pdf';
 import Modal from 'react-bootstrap/Modal';
 // import Table from 'react-bootstrap/Table';
@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
+
 
 
 const inputData = {
@@ -24,7 +24,6 @@ const inputData = {
 
 
 function Save(props) {
-    const searchParams = useSearchParams();
     const location = useLocation();
     const { file } = location.state || {}; // Access the file from the state
 
@@ -43,21 +42,21 @@ function Save(props) {
             const randomTotalPage = Math.floor(Math.random() * 11) + 10;
             setTotalPage(randomTotalPage);
         }
-
-
         //Ko gọi được API là vì sao?
+        //! thêm credential
 
-        axios.get('http://localhost:4000/printing/balance')
+        axios.get('http://localhost:4000/printing/balance', {
+            withCredentials: true
+        })
             .then(response => {
                 alert('User balance: ' + response.data.balance);
-                console.log('User balance:', response.data.balance);
                 setAvailablePages(response.data.balance);
             })
             .catch(error => {
                 console.error('There was an error fetching the user balance!', error);
             });
 
-    }, [props.show]);
+    }, [location.search, totalPage]);
 
     // Now you can use the file as needed
     console.log('file: ' + JSON.stringify(location));
@@ -92,6 +91,7 @@ function Save(props) {
     );
 }
 function Print_Config() {
+    const formRef = useRef();
     // Mấy ông Backend làm Logic gì ở đây nha
     const docs = [
         { uri: pdfFile, // Remote file
@@ -106,14 +106,14 @@ function Print_Config() {
    
       const [printers, setPrinters] = useState([]);
       const [isCustomSelected, setIsCustomSelected] = useState(false);
-      const [filePreview, setFilePreview] = useState(docs); 
+      const [filePreview, ] = useState(docs); 
 
-      const [selectedPrinter, setSelectedPrinter] = useState('Printer A');
-      const [numberOfPage, setNumberOfPage] = useState(0);
+      const [selectedPrinter, ] = useState('Printer A');
+      const [numberOfPage, ] = useState(0);
       const [numberOfCopy, setNumberOfCopy] = useState(1);
-        const [ratio, setRatio] = useState('');
-        const [paperSize, setPaperSize] = useState('');
-        const [numberOfSide, setNumberOfSide] = useState('');
+    const [ratio, ] = useState('');
+    const [paperSize, ] = useState('');
+    const [numberOfSide, ] = useState('');
       
     const updateNumCopies = (e) => {   
         alert('Number of copies: ' + e.target.value);
@@ -123,8 +123,7 @@ function Print_Config() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted');
-        inputData = {
+        const updatedInputData = {
             numberOfPage: numberOfPage,
             numberOfCopy: numberOfCopy,
             ratio: ratio,
@@ -132,8 +131,25 @@ function Print_Config() {
             numberOfSide: numberOfSide,
             pname: selectedPrinter
         };
-
-        console.log('Updated Input Data:', inputData);
+        console.log(updatedInputData);
+        // New code to save print history to the backend
+        axios.post('http://localhost:4000/printing/saveHistory', {
+            PName: selectedPrinter,
+            DName: "N5-2018.docx",
+            config: {
+                StartTime: new Date().toISOString(),
+                EndTime: new Date(new Date().getTime() + 30 * 60000).toISOString(),
+                Status: 'Completed',
+            }
+        },{
+            withCredentials: true  // Add this configuration
+        })
+        .then(response => {
+            console.log('Print history saved successfully:', response.data);
+        })
+        .catch(error => {
+            console.error('There was an error saving the print history!', error);
+        });
     };
 
     useEffect(() => {
@@ -165,6 +181,12 @@ function Print_Config() {
     };
     const [modalShow, setModalShow] = React.useState(false);
 
+    const handleSave = (e) => {
+        e.preventDefault();
+        handleSubmit(e);
+        setModalShow(true);
+    };
+
     return (
         <section id="hero" className="block hero-block" style={{ margin: '10px 0px 0' }}>
             <div style={{width:'100vw', height:'100vh'}}>
@@ -191,7 +213,7 @@ function Print_Config() {
                                     <div className ="spacing">Số bản</div>
                                     <div className ="spacing">Khổ giấy</div>
                                     </div>
-                                <Form className='normal-font' style={{ maxWidth:"40%"}} onSubmit={handleSubmit}>
+                                <Form ref={formRef} className='normal-font' style={{ maxWidth:"40%"}} onSubmit={handleSubmit}>
 
                                     <Form.Select aria-label="Printer" style={{marginTop:"15%", marginBottom:"16%"}}> 
 
@@ -231,7 +253,10 @@ function Print_Config() {
                                 </div>
                                 <div style={{display:'flex',justifyContent:'center', marginBottom:"30px"}}>
                                     <div className="button-holder">
-                                        <Button variant="primary" onClick={() => setModalShow(true)}>
+                                        <Button 
+                                            variant="primary" 
+                                            onClick={handleSave}
+                                        >
                                             Lưu
                                         </Button>
                                         <Save

@@ -4,9 +4,9 @@ import '../components/css/Hero.css';
 import React, { useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
 import check from '../assets/images/check.png'
-import waiting from '../assets/images/waiting.png'
-import inprogress from '../assets/images/in-progress.png'
-import status from '../assets/images/status.png'
+// import waiting from '../assets/images/waiting.png'
+// import inprogress from '../assets/images/in-progress.png'
+// import status from '../assets/images/status.png'
 
 function AppPrintStatus() {
     const url = window.location.href;
@@ -14,7 +14,7 @@ function AppPrintStatus() {
 
     useEffect(() => {
         alert(filename);
-    },[]);
+    },[filename]);
 
     return (
       <section id="hero" className="block hero-block">

@@ -1,5 +1,7 @@
 const express = require('express');
 const database = require('../storage/database');
+const PHDataFile = './storage/print_history.json';
+const fs = require('fs');
 const router = express.Router();
 /*
   Các routes dùng cho dịch vụ in (cấu hình giấy, in giấy, xem lịch sử in)
@@ -53,20 +55,13 @@ router.post('/setup', (req, res) => {
 
     database.PrintOrder.push(newPrintOrder);
 
-      //Đẩy lịch sử in
-
-
     res.status(201).json({ message: 'Print order created successfully' });
 });
 
 //Works
 router.get('/printerList', (req, res) => {
     const printers = database.Printer;
-    console.log(printers);
-
     const printerNames = printers.map(printer => printer.PName);
-
-    console.log(printerNames);
     res.status(200).json({ printers: printerNames });
 });
 
@@ -91,6 +86,45 @@ router.get('/balance', (req, res) => {
   res.status(200).json({ balance: userBalance });
 });
 
+const readPrinterHisData = () => {
+  try {
+    const data = fs.readFileSync(PHDataFile, 'utf8');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading user data:', error);
+    return [];
+  }
+};
 
+const writePrintersHisData = (users) => {
+  fs.writeFileSync(PHDataFile, JSON.stringify(users, null, 2));
+};
+
+router.post('/saveHistory', (req, res) => {
+    const { PName, DName, config } = req.body;
+    const username = req.session.username;
+    console.log(username)
+    const printers = readPrinterHisData();
+    
+    if (!PName || !DName || !config) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const printHistoryEntry = {
+        username: username,
+        PName: PName,
+        DName: DName,
+        config: {
+            StartTime: config.StartTime,
+            EndTime: config.EndTime,
+            Status: config.Status,
+        }
+    };
+    
+    printers.push(printHistoryEntry);
+    writePrintersHisData(printers);
+
+    res.status(201).json({ message: 'Print history saved successfully' });
+});
 
 module.exports = router;

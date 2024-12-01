@@ -8,8 +8,8 @@ import '../components/css/Report.css'
 function PrintReport() {
     const navigate = useNavigate();
     
-    const [minMonth, setMinMonth] = useState(1);
-    const [minYear, setMinYear] = useState(2020);
+    const [minMonth, ] = useState(1);
+    const [minYear, ] = useState(2020);
     const [loading, setLoading] = useState(false);
 
     const [selectedType, setSelectedType ] = useState('monthly');
