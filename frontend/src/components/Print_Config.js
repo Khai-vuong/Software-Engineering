@@ -49,7 +49,6 @@ function Save(props) {
             withCredentials: true
         })
             .then(response => {
-                alert('User balance: ' + response.data.balance);
                 setAvailablePages(response.data.balance);
             })
             .catch(error => {
@@ -116,7 +115,6 @@ function Print_Config() {
     const [numberOfSide, ] = useState('');
       
     const updateNumCopies = (e) => {   
-        alert('Number of copies: ' + e.target.value);
         setNumberOfCopy(e.target.value);
         inputData.numberOfCopy = e.target.value;
     };

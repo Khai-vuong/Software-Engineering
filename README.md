@@ -29,7 +29,7 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 |  2  | Nguyễn Anh Khoa  |   2211612   | khoa.nguyenanh0807@hcmut.edu.vn   | [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git2]|
 |  3  | Lê Thành Đạt |   2210683   | dat.le2210683@hcmut.edu.vn |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git3]|
 |  4  | Nguyễn Gia Thịnh  |  2213286   | thinh.nguyenza@hcmut.edu.vn   | [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git4]|
-|  5  | Vương Quang Khải  |  2211562   | @hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git5]|
+|  5  | Vương Quang Khải  |  2211562   | khai.vuongquang@hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git5]|
 |  6  | Nguyễn Đình Nam  |  2212136   | @hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git6]|
 |  7  | Trịnh Đình Khải  |  2211561   | @hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git7]|
 
