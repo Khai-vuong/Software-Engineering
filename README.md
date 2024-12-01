@@ -33,13 +33,13 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 |  6  | Nguyễn Đình Nam  |  2212136   | @hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git6]|
 |  7  | Trịnh Đình Khải  |  2211561   | @hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git7]|
 
-[git1]: https://github.com/shInNei
-[git2]: 
-[git3]: https://github.com/thnhdt
-[git4]: https://github.com/justzathink
-[git5]:
-[git6]:
-[git7]:
+[git1]: https://github.com/shInNei/
+[git2]: https://github.com/
+[git3]: https://github.com/thnhdt/
+[git4]: https://github.com/justzathink/
+[git5]:https://github.com/
+[git6]:https://github.com/
+[git7]:https://github.com/
 
 ## Requirements
 Đề bài được mô tả chi tiết trong file  <[Capstone_Project_Autumn_2023.pdf](https://github.com/Khai-vuong/Software-Engineering/blob/master/doc/Capstone_Project_Autumn_2023.pdf)>
