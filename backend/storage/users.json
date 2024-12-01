@@ -18,7 +18,7 @@
       "name": "Thanh Dat",
       "email": "123@gmail.com",
       "phone_num": "123-456-7890",
-      "balance": 89,
+      "balance": 99,
       "address": "Di An, Binh Duong"
     },
     "pay_history": [
@@ -28,19 +28,9 @@
         "timestamp": "2024-11-30T06:20:17.439Z"
       },
       {
-        "pageNumber": 5,
-        "paymentMethod": "Momo",
-        "timestamp": "2024-11-30T06:46:21.102Z"
-      },
-      {
         "pageNumber": 1,
         "paymentMethod": "Ngân hàng",
         "timestamp": "2024-11-30T08:58:15.353Z"
-      },
-      {
-        "pageNumber": 12,
-        "paymentMethod": "Ngân hàng",
-        "timestamp": "2024-11-30T10:03:28.964Z"
       },
       {
         "pageNumber": 2,
@@ -48,24 +38,14 @@
         "timestamp": "2024-11-30T14:16:02.763Z"
       },
       {
-        "pageNumber": 22,
-        "paymentMethod": "BKpay",
-        "timestamp": "2024-11-30T14:16:34.079Z"
-      },
-      {
-        "pageNumber": 11,
-        "paymentMethod": "BKpay",
-        "timestamp": "2024-11-30T14:18:20.410Z"
-      },
-      {
-        "pageNumber": 11,
-        "paymentMethod": "Momo",
-        "timestamp": "2024-11-30T14:21:44.936Z"
-      },
-      {
         "pageNumber": 11,
         "paymentMethod": "Ngân hàng",
         "timestamp": "2024-11-30T14:22:17.374Z"
+      },
+      {
+        "pageNumber": 10,
+        "paymentMethod": "BKpay",
+        "timestamp": "2024-12-01T09:20:07.347Z"
       }
     ]
   }

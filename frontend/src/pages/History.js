@@ -66,8 +66,8 @@ function AppHistory() {
                         rows.push(
                             <tr key={index}>
                                 <td>{index + 1}</td>
+                                <td>{entry.DName}</td>
                                 <td>{entry.PName}</td>
-                                <td>{entry.PrinterName}</td>
                                 <td>{entry.StartTime}</td>
                                 <td>{entry.EndTime}</td>
                                 <td>{entry.Status}</td>

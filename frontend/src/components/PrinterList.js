@@ -1,5 +1,5 @@
 import { Container, Button, ListGroup, Modal, Form } from "react-bootstrap";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import '../components/css/Hero.css';
 import axios from "axios";
 
@@ -17,15 +17,30 @@ function PrinterList() {
         headers: { "Content-Type": "application/json" },
     });
 
-    const fetchPrinters = async () => {
-        try {
-            const response = await apiClient.get("/printers");
-            return response.data;
-        } catch (error) {
-            console.error("Error fetching printers: ", error);
-            throw error;
-        }
-    };
+    useEffect(() => {
+        const fetchPrinters = async () => {
+            try {
+                const response = await apiClient.get("/printers");
+                return response.data;
+            } catch (error) {
+                console.error("Error fetching printers: ", error);
+                throw error;
+            }
+        };
+
+        const loadPrinters = async () => {
+            try {
+                const data = await fetchPrinters();
+                setPrinters(data);
+            } catch (error) {
+                setError("Failed to load printers");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadPrinters();
+    }, [apiClient]);
 
     const updatePrinterStatus = async (printerName, enabled) => {
         try {
@@ -46,21 +61,6 @@ function PrinterList() {
             throw error;
         }
     };
-
-    useEffect(() => {
-        const loadPrinters = async () => {
-            try {
-                const data = await fetchPrinters();
-                setPrinters(data);
-            } catch (error) {
-                setError("Failed to load printers");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadPrinters();
-    }, []);
 
     const togglePrinterStatus = async (printerName, enable) => {
         setPrinters((prevPrinters) =>
@@ -119,7 +119,7 @@ function PrinterList() {
                         >
                             <div className="d-flex justify-content-between align-items-center">
                                 <span>
-                                    <b>{printer.PName}</b> ({printer.enabled ? "Kích hoạt" : "Vô hiệu hóa"})
+                                    <b>{printer.PName} </b> - Vị trí: {printer.Location} ({printer.enabled ? "Kích hoạt" : "Vô hiệu hóa"})
                                 </span>
                                 <Button
                                     variant={printer.enabled ? "warning" : "success"}

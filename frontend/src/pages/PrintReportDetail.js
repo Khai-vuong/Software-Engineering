@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import { IoPrintOutline } from "react-icons/io5";
@@ -16,22 +16,21 @@ function PrintReportDetail() {
     const [loading, setLoading] = useState(true);  
 
     // Dữ liệu mẫu (có thể thay thế bằng dữ liệu thực tế từ API hoặc database)
-    const sampleData = [
-        { id: 1, name: 'Máy in A1', quantity: 120, revenue: 1500 },
-        { id: 2, name: 'Máy in B2', quantity: 80, revenue: 1000 },
-        { id: 3, name: 'Máy in C3', quantity: 200, revenue: 2500 },
-        { id: 4, name: 'Máy in D4', quantity: 50, revenue: 800 },
-    ];
+    const sampleData = useMemo(() => [
+        { id: 1, name: 'Máy in A', quantity: 120, revenue: 1500 },
+        { id: 2, name: 'Máy in B', quantity: 80, revenue: 1000 },
+        { id: 3, name: 'Máy in C', quantity: 200, revenue: 2500 },
+    ], []);
 
     
     useEffect(() => {
         if (year && month) {
             setData(sampleData);  
         } else {
-            setData(sampleData);  
+            setData(sampleData); 
         }
         setLoading(false);  
-    }, [year, month]);
+    }, [sampleData, data, year, month]);
 
     const handlePrint = useReactToPrint({
         content: () => document.getElementById("reportContent"),
