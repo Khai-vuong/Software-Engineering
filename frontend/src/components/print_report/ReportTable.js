@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function ReportTable() {
-    const [reportData, setReportData] = useState([
+    const [reportData, ] = useState([
         { month: '01', year: '2024' },
         { month: '02', year: '2024' },
         { month: '03', year: '2024' },
