@@ -42,5 +42,5 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 [git7]:
 
 ## Requirements
-Đề bài được mô tả chi tiết trong file  <[HK1_2122_VideoStreamingApplication_Assig1.pdf](https://github.com/toanvo4121/CSE-ComputerNetwork-VideoStreamingApplication/files/7495860/HK1_2122_VideoStreamingApplication_Assig1.pdf)>
+Đề bài được mô tả chi tiết trong file  <[Capstone_Project_Autumn_2023.pdf](https://github.com/Khai-vuong/Software-Engineering/blob/master/doc/Capstone_Project_Autumn_2023.pdf)>
 
