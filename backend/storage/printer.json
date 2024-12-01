@@ -14,5 +14,13 @@
     "Model": "X123",
     "Status": "Unavailable",
     "enabled": false
+  },
+  {
+    "PName": "Printer C",
+    "enabled": true,
+    "Location": "CS2-H6-106",
+    "Brand": "BrandX",
+    "Model": "X123",
+    "Status": "Available"
   }
 ]

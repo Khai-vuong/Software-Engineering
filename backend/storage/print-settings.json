@@ -7,11 +7,14 @@
     "docx",
     "txt"
   ],
-  "defaultPages": "5",
-  "resetDate": "2025-01-25",
+  "defaultPages": "10",
+  "resetDate": "2025-01-01",
   "permittedFileTypes": [
     "pdf",
     "docx",
-    "txt"
+    "txt",
+    "jpg",
+    "png",
+    "doc"
   ]
 }
