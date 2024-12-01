@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import '../components/css/Hero.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
 import check from '../assets/images/check.png'
 import waiting from '../assets/images/waiting.png'
@@ -9,6 +9,13 @@ import inprogress from '../assets/images/in-progress.png'
 import status from '../assets/images/status.png'
 
 function AppPrintStatus() {
+    const url = window.location.href;
+    const filename = url.substring(url.lastIndexOf('/') + 1);
+
+    useEffect(() => {
+        alert(filename);
+    },[]);
+
     return (
       <section id="hero" className="block hero-block">
         <Container fluid>
@@ -25,13 +32,13 @@ function AppPrintStatus() {
                 </thead>
                 <tbody>
                 <tr>
-                    <td>A.docx</td>
+                    <td>{filename}</td>
                     <td style={{color: 'green'}}>
                         In Thành công {' '}
                         <Image src={check} className="img-fluid" style={{ maxWidth: '20px', height: '20' }} />
                     </td>
                 </tr>
-                <tr>
+                {/* <tr>
                     <td>B.docx</td>
                     <td style={{color: 'blue'}}>    
                         Đang in{' '}
@@ -53,7 +60,7 @@ function AppPrintStatus() {
                         In thất bại{' '}
                         <Image src={status} className="img-fluid" style={{ maxWidth: '20px', height: '20' }} />
                     </td>
-                </tr>
+                </tr> */}
                 </tbody>
             </Table>
         </Container>
