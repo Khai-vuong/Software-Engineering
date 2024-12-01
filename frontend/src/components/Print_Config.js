@@ -12,6 +12,17 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
+
+const inputData = {
+    numberOfPage: 0,
+    numberOfCopy: 0,
+    ratio: '',
+    paperSize: '',
+    numberOfSide: '',
+    pname: ''
+};
+
+
 function Save(props) {
     const searchParams = useSearchParams();
     const location = useLocation();
@@ -19,9 +30,7 @@ function Save(props) {
 
     const [filename, setFilename] = useState('');
     const [totalPage, setTotalPage] = useState(0);
-    const [numCopies, setNumCopies] = useState(4);
     const [availablePages, setAvailablePages] = useState(25); 
-    const [balance, setBalance] = useState(0);
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -30,8 +39,11 @@ function Save(props) {
             setFilename(fileNameFromParams);
         }
 
-        const randomTotalPage = Math.floor(Math.random() * 11) + 10;
-        setTotalPage(randomTotalPage);
+        if (totalPage === 0) {
+            const randomTotalPage = Math.floor(Math.random() * 11) + 10;
+            setTotalPage(randomTotalPage);
+        }
+
 
         //Ko gọi được API là vì sao?
 
@@ -65,11 +77,11 @@ function Save(props) {
           <h3>File: {filename}</h3>
           {file && <h3>Uploaded File: {file.name}</h3>}
           <h3>Số trang: {totalPage}</h3>
-          <h3>Số bản: {numCopies}</h3>
+          <h3>Số bản: {inputData.numberOfCopy}</h3>
           <h3>Số trang hiện có: {availablePages} </h3>
         </Modal.Body>
         <Modal.Footer>
-            <Link to='/confirm'>
+            <Link to={`/confirm/${filename}`}>
                 <Button variant="primary" type="submit">
                         Xác nhận
                 </Button>
@@ -96,8 +108,34 @@ function Print_Config() {
       const [isCustomSelected, setIsCustomSelected] = useState(false);
       const [filePreview, setFilePreview] = useState(docs); 
 
-
+      const [selectedPrinter, setSelectedPrinter] = useState('Printer A');
+      const [numberOfPage, setNumberOfPage] = useState(0);
+      const [numberOfCopy, setNumberOfCopy] = useState(1);
+        const [ratio, setRatio] = useState('');
+        const [paperSize, setPaperSize] = useState('');
+        const [numberOfSide, setNumberOfSide] = useState('');
       
+    const updateNumCopies = (e) => {   
+        alert('Number of copies: ' + e.target.value);
+        setNumberOfCopy(e.target.value);
+        inputData.numberOfCopy = e.target.value;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted');
+        inputData = {
+            numberOfPage: numberOfPage,
+            numberOfCopy: numberOfCopy,
+            ratio: ratio,
+            paperSize: paperSize,
+            numberOfSide: numberOfSide,
+            pname: selectedPrinter
+        };
+
+        console.log('Updated Input Data:', inputData);
+    };
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';  // Disable scroll
 
@@ -153,7 +191,7 @@ function Print_Config() {
                                     <div className ="spacing">Số bản</div>
                                     <div className ="spacing">Khổ giấy</div>
                                     </div>
-                                <Form className='normal-font' style={{ maxWidth:"40%"}} >
+                                <Form className='normal-font' style={{ maxWidth:"40%"}} onSubmit={handleSubmit}>
 
                                     <Form.Select aria-label="Printer" style={{marginTop:"15%", marginBottom:"16%"}}> 
 
@@ -182,7 +220,8 @@ function Print_Config() {
                                     <option value="2">Tùy chỉnh</option>
                                     </Form.Select>
 
-                                    <Form.Control size="sm" type="text" placeholder="Số Bản" className="form-style" style={{height:"5%"}}/>
+                                    <Form.Control size="sm" type="text" placeholder="Số Bản" className="form-style" style={{height:"5%"}}
+                                    onChange={updateNumCopies}/>
 
                                     <Form.Select aria-label="Default select example" className="form-style"> 
                                     <option value="1">A4</option>

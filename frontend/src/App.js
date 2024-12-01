@@ -45,7 +45,7 @@ function App() {
         <Route path="/guest" element={<AppGuestHero/>} /> {/* Guest */}
         <Route path="/logedin" element={<AppHero/>} /> {/* Loged in */}
         <Route path="/print" element={<Print />} /> {/* Route for print config */}
-        <Route path="/confirm" element={<AppPrintStatus />} /> {/* Route for print status */}
+        <Route path="/confirm/*" element={<AppPrintStatus />} /> {/* Route for print status */}
         <Route path="/setup" element={<PrintConfig />} /> {/* Route for print config */}
         <Route path="/history" element={<AppHistory />} /> {/* Printing History */}
         <Route path="/purchase" element={<AppPurchase />} /> {/* Purchase */}
