@@ -41,4 +41,6 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 [git6]:
 [git7]:
 
+## Requirements
+Đề bài được mô tả chi tiết trong file  <[HK1_2122_VideoStreamingApplication_Assig1.pdf](https://github.com/toanvo4121/CSE-ComputerNetwork-VideoStreamingApplication/files/7495860/HK1_2122_VideoStreamingApplication_Assig1.pdf)>
 
