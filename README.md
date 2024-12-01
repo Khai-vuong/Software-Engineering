@@ -31,10 +31,10 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 |  4  | Nguyễn Gia Thịnh  |  - 2213286   | linh.nguyen1505@hcmut.edu.vn   | [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git4] |
 |  5  | Vương Quang Khải  |  - 2211562   | linh.nguyen1505@hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git5] |
 |  6  | Nguyễn Đình Nam  |  - 2212136   | linh.nguyen1505@hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git6] |
-|  7  | Trịnh Đình Khải  |  - 2211561   | linh.nguyen1505@hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][] |
+|  7  | Trịnh Đình Khải  |  - 2211561   | linh.nguyen1505@hcmut.edu.vn   |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git7] |
 
 [git1]: https://github.com/shInNei
-[git2]:
+[git2]: 
 [git3]:
 [git4]:
 [git5]:
