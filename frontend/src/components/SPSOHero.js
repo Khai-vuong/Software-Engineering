@@ -18,7 +18,7 @@ function AppSPSOHero() {
             <div className="title-holder">
               <br/><br/><br/><br/>
               <h2>Chào mừng bạn đến với BKPrinter</h2>
-              <h1>Admin1</h1>
+              <h1>Admin 1</h1>
             </div>
           </Col>
         </Row>

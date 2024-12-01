@@ -95,7 +95,7 @@ function Print_Config() {
     const docs = [
         { uri: pdfFile, // Remote file
           fileType: "pdf",
-          fileName: "N5-2018.docx"
+          fileName: "API.docx"
         },
         {
             // uri: require('../assets/images/N5-2018.pdf'),
@@ -133,7 +133,7 @@ function Print_Config() {
         // New code to save print history to the backend
         axios.post('http://localhost:4000/printing/saveHistory', {
             PName: selectedPrinter,
-            DName: "N5-2018.docx",
+            DName: "API.docx",
             config: {
                 StartTime: new Date().toISOString(),
                 EndTime: new Date(new Date().getTime() + 30 * 60000).toISOString(),

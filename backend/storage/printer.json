@@ -5,7 +5,7 @@
     "Brand": "BrandX",
     "Model": "X123",
     "Status": "Available",
-    "enabled": true
+    "enabled": false
   },
   {
     "Location": "CS1-B1-201",
@@ -17,7 +17,7 @@
   },
   {
     "PName": "Printer C",
-    "enabled": false,
+    "enabled": true,
     "Location": "CS2-H6-106",
     "Brand": "BrandX",
     "Model": "X123",

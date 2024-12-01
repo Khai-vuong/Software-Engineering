@@ -19,7 +19,7 @@ function AppGuestHero() {
               <br/><br/><br/><br/>
               <h2>Chào mừng bạn đến với BKPrinter</h2>
               <h1>Người Dùng Khách</h1>
-              <a className="btn btn-primary" href={'google.com'}> Đăng nhập <i className="fas fa-chevron-right"></i></a>
+              <a className="btn btn-primary" href={'/login'}> Đăng nhập <i className="fas fa-chevron-right"></i></a>
             </div>
           </Col>
         </Row>

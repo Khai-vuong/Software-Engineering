@@ -72,7 +72,7 @@ function HeaderSwitcher() {
   if (location.pathname === "/" || location.pathname === "/choice" || location.pathname === "/login" || location.pathname === "/guest") {
     return <GuestAppHeader />;  // Render the second header for the '/setup' route
   }
-  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/report" || location.pathname === "/printreport")
+  if(location.pathname === "/loginasstaff" || location.pathname === "/printers" || location.pathname === "/printSetting" || location.pathname === "/printreportdetail" || location.pathname === "/report" || location.pathname === "/printreport")
   {
     return <AppSPSOHeader/>;
   }
