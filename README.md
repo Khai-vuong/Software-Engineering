@@ -44,3 +44,16 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 ## Requirements
 Đề bài được mô tả chi tiết trong file  <[Capstone_Project_Autumn_2023.pdf](https://github.com/Khai-vuong/Software-Engineering/blob/master/doc/Capstone_Project_Autumn_2023.pdf)>
 
+## Languages & Tools
+<img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-256.png" align="center" style="margin-left:10px; margin-bottom:5px;" width="70px" alt="React Logo"/>
+    
+    
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" 
+         align="center" 
+         style="margin-left:10px; margin-bottom:5px;" 
+         width="70px" 
+         alt="Express Logo" />
+
+## How to run
+
+## Report & Slide
