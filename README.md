@@ -53,7 +53,3 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
          style="margin-left:10px; margin-bottom:5px;" 
          width="70px" 
          alt="Express Logo" />
-
-## How to run
-
-## Report & Slide
