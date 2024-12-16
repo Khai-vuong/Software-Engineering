@@ -145,7 +145,7 @@ function Print() {
         }
     };
     return (
-        <section id="hero" className="block hero-block" style={{ margin: '70px 50px 0'}}>
+        <section id="hero" className="block hero-block" style={{ margin: '40px 50px 0'}}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
             <div class="printer-parent container" style={{ display: 'flex', gap: '50px'}}>
             <div class="col-mb-2 printer">
@@ -205,7 +205,7 @@ function Print() {
                 {/* Đây là File 2*/}
 
 
-                <div style={{display:"flex", justifyContent:"center", marginTop:"5%"}}>
+                <div style={{display:"flex", justifyContent:"center", marginTop:"5%", marginTop:"5%"}}>
                 <button type="submit" class="btn btn-success" onClick={handleSetupClick}>Thiết lập trang in</button>
                 </div>
             </div>

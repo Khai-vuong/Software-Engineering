@@ -186,9 +186,9 @@ function Print_Config() {
     };
 
     return (
-        <section id="hero" className="block hero-block" style={{ margin: '10px 0px 0' }}>
+        <section id="hero" className="block hero-block" style={{ margin: '-7.5px 0px 0' }}>
             <div style={{width:'100vw', height:'100vh'}}>
-                <div className="container-fluid config-container" style={{minHeight: '500px'}}>
+                <div className="container-fluid config-container" style={{minHeight: '600px'}}>
                     <div className="row" style={{height: '100%'}}>
                         <div className="col-8 border-col" style={{height:'100%'}}>
                             <div className="file-preview-container">
@@ -249,8 +249,7 @@ function Print_Config() {
                                     </Form.Select>
                                 </Form>
                                 </div>
-                                <div style={{display:'flex',justifyContent:'center', marginBottom:"30px"}}>
-                                    <div className="button-holder">
+                                    <div style={{display:'flex',justifyContent:'center', marginBottom:"80px"}}>
                                         <Button 
                                             variant="primary" 
                                             onClick={handleSave}
@@ -262,7 +261,6 @@ function Print_Config() {
                                             onHide={() => setModalShow(false)}
                                         />
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
